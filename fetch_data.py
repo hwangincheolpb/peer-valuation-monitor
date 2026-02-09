@@ -168,6 +168,18 @@ def _calc_peer_avg(stocks: list) -> dict:
     return avg
 
 
+_ticker_cache = {}
+
+
+def fetch_stock_data_cached(symbol: str) -> dict:
+    """캐시된 티커 데이터 반환. 같은 티커 중복 호출 방지."""
+    if symbol in _ticker_cache:
+        return _ticker_cache[symbol].copy()
+    data = fetch_stock_data(symbol)
+    _ticker_cache[symbol] = data
+    return data.copy()
+
+
 def main():
     config = load_config()
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -193,6 +205,7 @@ def main():
             "id": cat["id"],
             "name": cat["name"],
             "name_en": cat["name_en"],
+            "group": cat.get("group", ""),
             "stocks": [],
             "shortage": [],
         }
@@ -226,15 +239,16 @@ def main():
             count += 1
             symbol = stock_cfg["symbol"]
             name = stock_cfg["name"]
+            was_cached = symbol in _ticker_cache
             print(f"  [{count}/{total_stocks}] {name} ({symbol})...", end=" ", flush=True)
 
             try:
-                data = fetch_stock_data(symbol)
+                data = fetch_stock_data_cached(symbol)
                 data["name"] = name
                 data["country"] = stock_cfg["country"]
                 data["marketCapFormatted"] = format_market_cap(data.get("marketCap"))
                 cat_data["stocks"].append(data)
-                print("OK")
+                print("OK (cached)" if was_cached else "OK")
             except Exception as e:
                 print(f"ERROR: {e}")
                 errors.append({"symbol": symbol, "name": name, "error": str(e)})
@@ -245,7 +259,8 @@ def main():
                     "error": str(e),
                 })
 
-            time.sleep(1.5)
+            if not was_cached:
+                time.sleep(1.5)
 
         # 피어 평균
         valid = [s for s in cat_data["stocks"] if "error" not in s]

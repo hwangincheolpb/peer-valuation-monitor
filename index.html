@@ -24,7 +24,12 @@
         .sidebar { width: 240px; min-width: 240px; height: 100vh; overflow-y: auto; position: sticky; top: 0; }
         .sidebar::-webkit-scrollbar { width: 4px; }
         .sidebar::-webkit-scrollbar-thumb { background: #2a2d3a; border-radius: 2px; }
-        .cat-item { padding: 8px 16px; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; font-size: 13px; }
+        .group-header { padding: 6px 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; margin-top: 4px; }
+        .group-header:hover { color: #9ca3af; }
+        .group-header .chevron { font-size: 8px; transition: transform 0.15s; }
+        .group-header.collapsed .chevron { transform: rotate(-90deg); }
+        .group-items.collapsed { display: none; }
+        .cat-item { padding: 6px 16px 6px 20px; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; font-size: 12px; }
         .cat-item:hover { background: #1a1d29; }
         .cat-item.active { background: #1a1d29; border-left-color: #3b82f6; color: white; }
         .alert-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; flex-shrink: 0; }
@@ -47,6 +52,8 @@
         .shortage-chip.green { background: #22c55e20; color: #22c55e; border: 1px solid #22c55e40; }
         .shortage-detail { font-size: 12px; padding: 6px 10px; background: #151825; border-radius: 6px; border: 1px solid #2a2d3a; }
         .stat-card { background: #1a1d29; border: 1px solid #2a2d3a; border-radius: 8px; padding: 12px 16px; }
+        .group-header.active { color: #3b82f6; background: #1a1d2960; }
+        .subcat-divider td { background: #151825 !important; padding: 6px 12px !important; font-size: 12px; font-weight: 700; color: #60a5fa; border-left: 3px solid #3b82f6; }
     </style>
 </head>
 <body>
@@ -107,7 +114,7 @@
 
 <script>
 const DATA_URL = 'data/valuation-data.json';
-const FLAGS = {KR:'🇰🇷',US:'🇺🇸',TW:'🇹🇼',JP:'🇯🇵',NL:'🇳🇱',UK:'🇬🇧',DE:'🇩🇪',SG:'🇸🇬',DK:'🇩🇰',CH:'🇨🇭',FR:'🇫🇷',CN:'🇨🇳',CA:'🇨🇦',AU:'🇦🇺',BR:'🇧🇷',CL:'🇨🇱',BE:'🇧🇪'};
+const FLAGS = {KR:'🇰🇷',US:'🇺🇸',TW:'🇹🇼',JP:'🇯🇵',NL:'🇳🇱',UK:'🇬🇧',DE:'🇩🇪',SG:'🇸🇬',DK:'🇩🇰',CH:'🇨🇭',FR:'🇫🇷',CN:'🇨🇳',CA:'🇨🇦',AU:'🇦🇺',BR:'🇧🇷',CL:'🇨🇱',BE:'🇧🇪',NO:'🇳🇴',IT:'🇮🇹',KZ:'🇰🇿'};
 
 const COLUMNS = [
     { key: 'name', label: '종목', align: 'left', w: 'min-w-[180px]' },
@@ -127,6 +134,7 @@ const COLUMNS = [
 
 let allData = null;
 let currentCat = 0;
+let currentGroup = null;
 let sortCol = 'forwardPE';
 let sortAsc = true;
 
@@ -156,23 +164,44 @@ function renderMeta() {
 
 function renderSidebar() {
     const el = document.getElementById('sidebarList');
-    el.innerHTML = allData.categories.map((cat, i) => {
-        const alert = cat.alertSummary;
-        const dot = alert ? `<span class="alert-dot alert-${alert}"></span>` : '<span style="width:14px;display:inline-block"></span>';
-        const badge = cat.shortageCount
-            ? `<span class="text-xs px-1.5 py-0.5 rounded-full ml-auto
-                ${alert === 'red' ? 'bg-red-500/20 text-red-400' : alert === 'yellow' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'}"
-              >${cat.shortageCount}</span>`
-            : '';
-        return `<div class="cat-item flex items-center ${i === 0 ? 'active' : ''}" data-idx="${i}" onclick="renderCategory(${i})">
-            ${dot}<span class="truncate">${cat.name}</span>${badge}
-        </div>`;
+    // group categories by group field
+    const groups = [];
+    const groupMap = {};
+    allData.categories.forEach((cat, i) => {
+        const g = cat.group || '기타';
+        if (!(g in groupMap)) {
+            groupMap[g] = groups.length;
+            groups.push({ name: g, items: [] });
+        }
+        groups[groupMap[g]].items.push({ cat, idx: i });
+    });
+
+    el.innerHTML = groups.map((group, gi) => {
+        const items = group.items.map(({ cat, idx }) => {
+            const alert = cat.alertSummary;
+            const dot = alert ? `<span class="alert-dot alert-${alert}"></span>` : '<span style="width:14px;display:inline-block"></span>';
+            const badge = cat.shortageCount
+                ? `<span class="text-xs px-1 py-0 rounded-full ml-auto
+                    ${alert === 'red' ? 'bg-red-500/20 text-red-400' : alert === 'yellow' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'}"
+                  >${cat.shortageCount}</span>`
+                : '';
+            return `<div class="cat-item flex items-center ${idx === 0 ? 'active' : ''}" data-idx="${idx}" onclick="renderCategory(${idx})">
+                ${dot}<span class="truncate">${cat.name}</span>${badge}
+            </div>`;
+        }).join('');
+        return `<div class="group-header" data-group="${group.name}" onclick="renderGroupView('${group.name.replace(/'/g, "\\'")}')">
+            <span>${group.name}</span>
+            <span class="text-xs text-muted ml-1">${group.items.length}</span>
+        </div>
+        <div class="group-items">${items}</div>`;
     }).join('');
 }
 
 function renderCategory(idx) {
     currentCat = idx;
+    currentGroup = null;
     document.querySelectorAll('.cat-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+    document.querySelectorAll('.group-header').forEach(el => el.classList.remove('active'));
 
     const cat = allData.categories[idx];
 
@@ -355,7 +384,100 @@ function getColor(col, val, avg) {
 function toggleSort(key) {
     if (sortCol === key) sortAsc = !sortAsc;
     else { sortCol = key; sortAsc = true; }
-    renderCategory(currentCat);
+    if (currentGroup) renderGroupView(currentGroup);
+    else renderCategory(currentCat);
+}
+
+function renderGroupView(groupName) {
+    currentGroup = groupName;
+    currentCat = -1;
+    document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.group-header').forEach(el =>
+        el.classList.toggle('active', el.dataset.group === groupName));
+
+    const groupCats = allData.categories.filter(c => c.group === groupName);
+
+    document.getElementById('catTitle').textContent = groupName;
+    document.getElementById('catTitleEn').textContent = groupCats.map(c => c.name).join(' · ');
+
+    // combined shortage
+    const allShortage = groupCats.flatMap(c => c.shortage || []);
+    renderShortageChips({ shortage: allShortage, shortageCount: allShortage.length,
+        alertSummary: allShortage.some(s => s.alertLevel === 'red') ? 'red' :
+            allShortage.some(s => s.alertLevel === 'yellow') ? 'yellow' :
+            allShortage.length ? 'green' : null });
+    renderShortageDetail({ shortage: allShortage });
+
+    // combined summary
+    const allStocks = groupCats.flatMap(c => (c.stocks || []).filter(s => !s.error));
+    const combinedAvg = calcPeerAvgJS(allStocks);
+    renderSummary({ peerAvg: combinedAvg });
+
+    // grouped table
+    document.getElementById('tableHead').innerHTML = '<tr>' + COLUMNS.map(col =>
+        `<th class="px-3 py-2 text-xs font-medium text-muted bg-surface border-b border-border
+                    text-${col.align} ${col.w || ''} ${sortCol === col.key ? 'sorted' : ''}"
+            onclick="toggleSort('${col.key}')">
+            ${col.label} <span class="sort-icon">${sortCol === col.key ? (sortAsc ? '▲' : '▼') : '↕'}</span>
+        </th>`
+    ).join('') + '</tr>';
+
+    let html = '';
+    for (const cat of groupCats) {
+        const avg = cat.peerAvg || {};
+        let stocks = (cat.stocks || []).filter(s => !s.error);
+        stocks.sort((a, b) => {
+            let va = a[sortCol], vb = b[sortCol];
+            if (va == null && vb == null) return 0;
+            if (va == null) return 1;
+            if (vb == null) return -1;
+            if (typeof va === 'string') return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+            return sortAsc ? va - vb : vb - va;
+        });
+
+        html += `<tr class="subcat-divider"><td colspan="${COLUMNS.length}">${cat.name} <span class="font-normal text-muted ml-2">${cat.name_en} · ${stocks.length}종목</span></td></tr>`;
+
+        for (const stock of stocks) {
+            html += '<tr class="border-b border-border/30">' + COLUMNS.map(col => {
+                const val = stock[col.key];
+                if (col.key === 'name') {
+                    const flag = FLAGS[stock.country] || '';
+                    return `<td class="px-3 py-2 text-left ${col.w || ''}">
+                        <span class="text-xs">${flag}</span>
+                        <span class="font-medium text-white">${stock.name}</span>
+                        <span class="text-muted text-xs ml-1">${stock.symbol}</span>
+                    </td>`;
+                }
+                const display = fmt(val, col.format);
+                const color = getColor(col, val, avg);
+                return `<td class="px-3 py-2 text-${col.align} metric-cell ${color}">${display}</td>`;
+            }).join('') + '</tr>';
+        }
+
+        if (stocks.length > 0) {
+            html += '<tr class="peer-avg-row">' + COLUMNS.map(col => {
+                if (col.key === 'name') return `<td class="px-3 py-2 text-left text-blue-400">${cat.name} Avg</td>`;
+                return `<td class="px-3 py-2 text-${col.align} metric-cell">${fmt(avg[col.key], col.format)}</td>`;
+            }).join('') + '</tr>';
+        }
+    }
+    document.getElementById('tableBody').innerHTML = html;
+}
+
+function calcPeerAvgJS(stocks) {
+    const metrics = ['forwardPE','trailingPE','priceToBook','enterpriseToEbitda',
+        'dividendYield','returnOnEquity','fwd1y_growth','targetUpside','epsRevision30d'];
+    const avg = {};
+    for (const m of metrics) {
+        const vals = stocks.map(s => s[m]).filter(v => v != null);
+        if (vals.length) {
+            avg[m] = vals.reduce((a, b) => a + b, 0) / vals.length;
+            const sorted = [...vals].sort((a, b) => a - b);
+            const mid = Math.floor(sorted.length / 2);
+            avg[m + '_median'] = sorted.length % 2 === 0 ? (sorted[mid-1]+sorted[mid])/2 : sorted[mid];
+        }
+    }
+    return avg;
 }
 
 loadData();

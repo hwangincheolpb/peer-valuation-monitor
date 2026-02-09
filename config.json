@@ -1,243 +1,299 @@
 {
   "shortagePath": "../structural-shortage-dashboard/data/master-dashboard.json",
   "categories": [
-    {
-      "id": "memory-hbm",
-      "name": "메모리/HBM",
-      "name_en": "Memory & HBM",
-      "shortageItems": ["HBM (고대역폭 메모리)", "DRAM", "NAND Flash", "실리콘 웨이퍼 (300mm)"],
-      "stocks": [
-        {"symbol": "000660.KS", "name": "SK하이닉스", "country": "KR"},
-        {"symbol": "005930.KS", "name": "삼성전자", "country": "KR"},
-        {"symbol": "MU", "name": "Micron", "country": "US"},
-        {"symbol": "WDC", "name": "Western Digital", "country": "US"}
-      ]
-    },
-    {
-      "id": "foundry-packaging",
-      "name": "파운드리/패키징",
-      "name_en": "Foundry & Packaging",
-      "shortageItems": ["CoWoS (첨단 패키징)", "ABF 기판", "유리 기판 (AI 반도체용)"],
-      "stocks": [
-        {"symbol": "TSM", "name": "TSMC", "country": "TW"},
-        {"symbol": "INTC", "name": "Intel", "country": "US"},
-        {"symbol": "GFS", "name": "GlobalFoundries", "country": "US"},
-        {"symbol": "ASX", "name": "ASE Technology", "country": "TW"},
-        {"symbol": "AMKR", "name": "Amkor", "country": "US"}
-      ]
-    },
-    {
-      "id": "ai-logic",
-      "name": "AI칩/로직",
-      "name_en": "AI & Logic Chips",
-      "shortageItems": [],
-      "stocks": [
-        {"symbol": "NVDA", "name": "NVIDIA", "country": "US"},
-        {"symbol": "AMD", "name": "AMD", "country": "US"},
-        {"symbol": "AVGO", "name": "Broadcom", "country": "US"},
-        {"symbol": "QCOM", "name": "Qualcomm", "country": "US"},
-        {"symbol": "MRVL", "name": "Marvell", "country": "US"},
-        {"symbol": "2454.TW", "name": "MediaTek", "country": "TW"}
-      ]
-    },
-    {
-      "id": "semi-equip",
-      "name": "반도체장비",
-      "name_en": "Semiconductor Equipment",
-      "shortageItems": ["ASML EUV 장비", "EUV 포토레지스트", "네온 가스"],
-      "stocks": [
-        {"symbol": "ASML", "name": "ASML", "country": "NL"},
-        {"symbol": "8035.T", "name": "Tokyo Electron", "country": "JP"},
-        {"symbol": "AMAT", "name": "Applied Materials", "country": "US"},
-        {"symbol": "LRCX", "name": "Lam Research", "country": "US"},
-        {"symbol": "KLAC", "name": "KLA", "country": "US"},
-        {"symbol": "4063.T", "name": "Shin-Etsu Chemical", "country": "JP"}
-      ]
-    },
-    {
-      "id": "power-infra",
-      "name": "전력 인프라",
-      "name_en": "Power Infrastructure",
-      "shortageItems": ["GOES (전기강판)", "대형 변압기"],
-      "stocks": [
-        {"symbol": "267260.KS", "name": "HD현대일렉트릭", "country": "KR"},
-        {"symbol": "005490.KS", "name": "POSCO홀딩스", "country": "KR"},
-        {"symbol": "ETN", "name": "Eaton", "country": "US"},
-        {"symbol": "GEV", "name": "GE Vernova", "country": "US"},
-        {"symbol": "ENR.DE", "name": "Siemens Energy", "country": "DE"},
-        {"symbol": "SU.PA", "name": "Schneider Electric", "country": "FR"}
-      ]
-    },
-    {
-      "id": "nuclear",
-      "name": "원자력/SMR",
-      "name_en": "Nuclear & SMR",
-      "shortageItems": ["우라늄 (U3O8)", "농축 우라늄 (SWU)", "HALEU (고농축 우라늄)"],
-      "stocks": [
-        {"symbol": "034020.KS", "name": "두산에너빌리티", "country": "KR"},
-        {"symbol": "CCJ", "name": "Cameco", "country": "CA"},
-        {"symbol": "NXE", "name": "NexGen Energy", "country": "CA"},
-        {"symbol": "UEC", "name": "Uranium Energy", "country": "US"},
-        {"symbol": "DNN", "name": "Denison Mines", "country": "CA"},
-        {"symbol": "SMR", "name": "NuScale Power", "country": "US"},
-        {"symbol": "BWXT", "name": "BWX Technologies", "country": "US"}
-      ]
-    },
-    {
-      "id": "battery-cell",
-      "name": "2차전지",
-      "name_en": "EV Battery",
-      "shortageItems": ["리튬 (탄산리튬)", "니켈 (Class 1)", "코발트", "전해액 (배터리)", "분리막 (배터리)", "양극재 (NCM)", "음극재 (흑연)"],
-      "stocks": [
-        {"symbol": "373220.KS", "name": "LG에너지솔루션", "country": "KR"},
-        {"symbol": "006400.KS", "name": "삼성SDI", "country": "KR"},
-        {"symbol": "6752.T", "name": "Panasonic", "country": "JP"},
-        {"symbol": "1211.HK", "name": "BYD", "country": "CN"},
-        {"symbol": "ALB", "name": "Albemarle", "country": "US"},
-        {"symbol": "SQM", "name": "SQM", "country": "CL"},
-        {"symbol": "247540.KQ", "name": "에코프로비엠", "country": "KR"},
-        {"symbol": "003670.KS", "name": "포스코퓨처엠", "country": "KR"}
-      ]
-    },
-    {
-      "id": "renewables",
-      "name": "신재생에너지",
-      "name_en": "Renewables",
-      "shortageItems": ["폴리실리콘", "태양광 셀", "태양광 모듈", "풍력 터빈 베어링", "풍력 타워", "풍력 블레이드", "CLV 선박 (케이블 포설)", "HVDC 케이블"],
-      "stocks": [
-        {"symbol": "009830.KS", "name": "한화솔루션", "country": "KR"},
-        {"symbol": "FSLR", "name": "First Solar", "country": "US"},
-        {"symbol": "ENPH", "name": "Enphase", "country": "US"},
-        {"symbol": "CSIQ", "name": "Canadian Solar", "country": "CA"},
-        {"symbol": "VWS.CO", "name": "Vestas", "country": "DK"},
-        {"symbol": "ORSTED.CO", "name": "Ørsted", "country": "DK"}
-      ]
-    },
-    {
-      "id": "rare-earth",
-      "name": "희토류/특수금속",
-      "name_en": "Rare Earth & Specialty Metals",
-      "shortageItems": ["희토류 (NdPr)", "디스프로슘", "터븀", "갈륨", "게르마늄", "안티몬", "인듐", "텔루륨", "비스무트"],
-      "stocks": [
-        {"symbol": "MP", "name": "MP Materials", "country": "US"},
-        {"symbol": "LYC.AX", "name": "Lynas Rare Earths", "country": "AU"},
-        {"symbol": "ILU.AX", "name": "Iluka Resources", "country": "AU"},
-        {"symbol": "VNP.TO", "name": "5N Plus", "country": "CA"},
-        {"symbol": "UMI.BR", "name": "Umicore", "country": "BE"}
-      ]
-    },
-    {
-      "id": "industrial-metals",
-      "name": "산업금속/광업",
-      "name_en": "Industrial Metals & Mining",
-      "shortageItems": ["구리 (Copper)", "알루미늄", "아연", "주석", "납", "망간", "바나듐", "실리콘 메탈", "철광석", "산화알루미늄 (알루미나)"],
-      "stocks": [
-        {"symbol": "FCX", "name": "Freeport-McMoRan", "country": "US"},
-        {"symbol": "BHP", "name": "BHP", "country": "AU"},
-        {"symbol": "RIO", "name": "Rio Tinto", "country": "AU"},
-        {"symbol": "SCCO", "name": "Southern Copper", "country": "US"},
-        {"symbol": "AA", "name": "Alcoa", "country": "US"},
-        {"symbol": "VALE", "name": "Vale", "country": "BR"}
-      ]
-    },
-    {
-      "id": "energy",
-      "name": "에너지",
-      "name_en": "Energy",
-      "shortageItems": ["천연가스 (LNG)", "석탄 (열연)", "원유 (WTI)", "원유 (Brent)", "가솔린 (RBOB)", "난방유"],
-      "stocks": [
-        {"symbol": "015760.KS", "name": "한국전력", "country": "KR"},
-        {"symbol": "XOM", "name": "ExxonMobil", "country": "US"},
-        {"symbol": "SHEL", "name": "Shell", "country": "UK"},
-        {"symbol": "TTE", "name": "TotalEnergies", "country": "FR"},
-        {"symbol": "CVX", "name": "Chevron", "country": "US"},
-        {"symbol": "LNG", "name": "Cheniere Energy", "country": "US"}
-      ]
-    },
-    {
-      "id": "defense",
-      "name": "방산/항공우주",
-      "name_en": "Defense & Aerospace",
-      "shortageItems": ["SRM (고체 로켓 모터)", "155mm 포탄", "티타늄 스폰지"],
-      "stocks": [
-        {"symbol": "012450.KS", "name": "한화에어로스페이스", "country": "KR"},
-        {"symbol": "079550.KS", "name": "LIG넥스원", "country": "KR"},
-        {"symbol": "LMT", "name": "Lockheed Martin", "country": "US"},
-        {"symbol": "RTX", "name": "RTX", "country": "US"},
-        {"symbol": "NOC", "name": "Northrop Grumman", "country": "US"},
-        {"symbol": "BA.L", "name": "BAE Systems", "country": "UK"}
-      ]
-    },
-    {
-      "id": "display",
-      "name": "디스플레이",
-      "name_en": "Display",
-      "shortageItems": ["디스플레이 패널", "OLED 패널", "LED 칩"],
-      "stocks": [
-        {"symbol": "034220.KS", "name": "LG디스플레이", "country": "KR"},
-        {"symbol": "OLED", "name": "Universal Display", "country": "US"},
-        {"symbol": "AUO", "name": "AU Optronics", "country": "TW"},
-        {"symbol": "6740.T", "name": "Japan Display", "country": "JP"}
-      ]
-    },
-    {
-      "id": "bio-pharma",
-      "name": "바이오/CMO",
-      "name_en": "Biotech & CMO",
-      "shortageItems": ["의료용 방사성 동위원소", "원료의약품 (API)", "헤파린"],
-      "stocks": [
-        {"symbol": "207940.KS", "name": "삼성바이오로직스", "country": "KR"},
-        {"symbol": "068270.KS", "name": "셀트리온", "country": "KR"},
-        {"symbol": "LLY", "name": "Eli Lilly", "country": "US"},
-        {"symbol": "NVO", "name": "Novo Nordisk", "country": "DK"},
-        {"symbol": "AZN", "name": "AstraZeneca", "country": "UK"},
-        {"symbol": "LONN.SW", "name": "Lonza", "country": "CH"}
-      ]
-    },
-    {
-      "id": "auto",
-      "name": "자동차",
-      "name_en": "Automotive",
-      "shortageItems": [],
-      "stocks": [
-        {"symbol": "005380.KS", "name": "현대자동차", "country": "KR"},
-        {"symbol": "000270.KS", "name": "기아", "country": "KR"},
-        {"symbol": "TM", "name": "Toyota", "country": "JP"},
-        {"symbol": "TSLA", "name": "Tesla", "country": "US"},
-        {"symbol": "VOW3.DE", "name": "Volkswagen", "country": "DE"},
-        {"symbol": "GM", "name": "GM", "country": "US"}
-      ]
-    },
-    {
-      "id": "internet",
-      "name": "인터넷/플랫폼",
-      "name_en": "Internet & Platform",
-      "shortageItems": [],
-      "stocks": [
-        {"symbol": "035420.KS", "name": "네이버", "country": "KR"},
-        {"symbol": "035720.KS", "name": "카카오", "country": "KR"},
-        {"symbol": "GOOGL", "name": "Alphabet", "country": "US"},
-        {"symbol": "META", "name": "Meta", "country": "US"},
-        {"symbol": "AMZN", "name": "Amazon", "country": "US"},
-        {"symbol": "0700.HK", "name": "Tencent", "country": "CN"},
-        {"symbol": "SE", "name": "Sea Limited", "country": "SG"}
-      ]
-    },
-    {
-      "id": "banks",
-      "name": "은행/금융",
-      "name_en": "Banks & Financials",
-      "shortageItems": [],
-      "stocks": [
-        {"symbol": "105560.KS", "name": "KB금융", "country": "KR"},
-        {"symbol": "055550.KS", "name": "신한지주", "country": "KR"},
-        {"symbol": "086790.KS", "name": "하나금융", "country": "KR"},
-        {"symbol": "JPM", "name": "JP Morgan", "country": "US"},
-        {"symbol": "BAC", "name": "Bank of America", "country": "US"},
-        {"symbol": "HSBC", "name": "HSBC", "country": "UK"},
-        {"symbol": "MUFG", "name": "MUFG", "country": "JP"}
-      ]
-    }
+    {"id": "hbm", "group": "메모리", "name": "HBM", "name_en": "High Bandwidth Memory", "shortageItems": ["HBM (고대역폭 메모리)"], "stocks": [
+      {"symbol": "000660.KS", "name": "SK하이닉스", "country": "KR"},
+      {"symbol": "005930.KS", "name": "삼성전자", "country": "KR"},
+      {"symbol": "MU", "name": "Micron", "country": "US"}
+    ]},
+    {"id": "dram", "group": "메모리", "name": "DRAM", "name_en": "DRAM", "shortageItems": ["DRAM", "실리콘 웨이퍼 (300mm)"], "stocks": [
+      {"symbol": "005930.KS", "name": "삼성전자", "country": "KR"},
+      {"symbol": "000660.KS", "name": "SK하이닉스", "country": "KR"},
+      {"symbol": "MU", "name": "Micron", "country": "US"},
+      {"symbol": "2408.TW", "name": "Nanya Technology", "country": "TW"},
+      {"symbol": "3231.TW", "name": "Winbond", "country": "TW"}
+    ]},
+    {"id": "nand", "group": "메모리", "name": "NAND Flash", "name_en": "NAND Flash", "shortageItems": ["NAND Flash"], "stocks": [
+      {"symbol": "005930.KS", "name": "삼성전자", "country": "KR"},
+      {"symbol": "000660.KS", "name": "SK하이닉스", "country": "KR"},
+      {"symbol": "MU", "name": "Micron", "country": "US"},
+      {"symbol": "WDC", "name": "Western Digital", "country": "US"}
+    ]},
+    {"id": "ssd", "group": "메모리", "name": "SSD", "name_en": "Solid State Drive", "shortageItems": [], "stocks": [
+      {"symbol": "005930.KS", "name": "삼성전자", "country": "KR"},
+      {"symbol": "WDC", "name": "Western Digital", "country": "US"},
+      {"symbol": "MU", "name": "Micron", "country": "US"},
+      {"symbol": "STX", "name": "Seagate", "country": "US"},
+      {"symbol": "8299.TWO", "name": "Phison", "country": "TW"},
+      {"symbol": "SIMO", "name": "Silicon Motion", "country": "TW"}
+    ]},
+    {"id": "hdd", "group": "메모리", "name": "HDD", "name_en": "Hard Disk Drive", "shortageItems": [], "stocks": [
+      {"symbol": "WDC", "name": "Western Digital", "country": "US"},
+      {"symbol": "STX", "name": "Seagate", "country": "US"}
+    ]},
+
+    {"id": "gpu", "group": "로직반도체", "name": "GPU/AI가속기", "name_en": "GPU & AI Accelerator", "shortageItems": [], "stocks": [
+      {"symbol": "NVDA", "name": "NVIDIA", "country": "US"},
+      {"symbol": "AMD", "name": "AMD", "country": "US"},
+      {"symbol": "INTC", "name": "Intel", "country": "US"}
+    ]},
+    {"id": "network-asic", "group": "로직반도체", "name": "네트워크칩", "name_en": "Network & Custom ASIC", "shortageItems": [], "stocks": [
+      {"symbol": "AVGO", "name": "Broadcom", "country": "US"},
+      {"symbol": "MRVL", "name": "Marvell", "country": "US"},
+      {"symbol": "ANET", "name": "Arista Networks", "country": "US"}
+    ]},
+    {"id": "mobile-soc", "group": "로직반도체", "name": "모바일칩", "name_en": "Mobile SoC", "shortageItems": [], "stocks": [
+      {"symbol": "QCOM", "name": "Qualcomm", "country": "US"},
+      {"symbol": "2454.TW", "name": "MediaTek", "country": "TW"}
+    ]},
+
+    {"id": "foundry", "group": "파운드리/패키징", "name": "파운드리", "name_en": "Foundry", "shortageItems": [], "stocks": [
+      {"symbol": "TSM", "name": "TSMC", "country": "TW"},
+      {"symbol": "INTC", "name": "Intel", "country": "US"},
+      {"symbol": "GFS", "name": "GlobalFoundries", "country": "US"},
+      {"symbol": "2303.TW", "name": "UMC", "country": "TW"},
+      {"symbol": "0981.HK", "name": "SMIC", "country": "CN"}
+    ]},
+    {"id": "packaging", "group": "파운드리/패키징", "name": "첨단패키징", "name_en": "Advanced Packaging", "shortageItems": ["CoWoS (첨단 패키징)", "ABF 기판", "유리 기판 (AI 반도체용)"], "stocks": [
+      {"symbol": "TSM", "name": "TSMC", "country": "TW"},
+      {"symbol": "ASX", "name": "ASE Technology", "country": "TW"},
+      {"symbol": "AMKR", "name": "Amkor", "country": "US"},
+      {"symbol": "600584.SS", "name": "JCET Group", "country": "CN"}
+    ]},
+
+    {"id": "euv", "group": "반도체장비", "name": "EUV", "name_en": "EUV Lithography", "shortageItems": ["ASML EUV 장비"], "stocks": [
+      {"symbol": "ASML", "name": "ASML", "country": "NL"}
+    ]},
+    {"id": "etch-dep", "group": "반도체장비", "name": "에칭/증착", "name_en": "Etch & Deposition", "shortageItems": [], "stocks": [
+      {"symbol": "AMAT", "name": "Applied Materials", "country": "US"},
+      {"symbol": "LRCX", "name": "Lam Research", "country": "US"},
+      {"symbol": "8035.T", "name": "Tokyo Electron", "country": "JP"},
+      {"symbol": "ASM.AS", "name": "ASM International", "country": "NL"},
+      {"symbol": "7735.T", "name": "SCREEN Holdings", "country": "JP"}
+    ]},
+    {"id": "inspection", "group": "반도체장비", "name": "검사/계측", "name_en": "Inspection & Metrology", "shortageItems": [], "stocks": [
+      {"symbol": "KLAC", "name": "KLA", "country": "US"},
+      {"symbol": "ONTO", "name": "Onto Innovation", "country": "US"},
+      {"symbol": "6920.T", "name": "Lasertec", "country": "JP"}
+    ]},
+    {"id": "semi-materials", "group": "반도체장비", "name": "반도체소재", "name_en": "Semiconductor Materials", "shortageItems": ["EUV 포토레지스트", "네온 가스"], "stocks": [
+      {"symbol": "4063.T", "name": "Shin-Etsu Chemical", "country": "JP"},
+      {"symbol": "3436.T", "name": "SUMCO", "country": "JP"},
+      {"symbol": "ENTG", "name": "Entegris", "country": "US"}
+    ]},
+
+    {"id": "transformer", "group": "전력", "name": "변압기", "name_en": "Transformer", "shortageItems": ["대형 변압기"], "stocks": [
+      {"symbol": "267260.KS", "name": "HD현대일렉트릭", "country": "KR"},
+      {"symbol": "010120.KS", "name": "LS ELECTRIC", "country": "KR"},
+      {"symbol": "ETN", "name": "Eaton", "country": "US"},
+      {"symbol": "GEV", "name": "GE Vernova", "country": "US"},
+      {"symbol": "ENR.DE", "name": "Siemens Energy", "country": "DE"},
+      {"symbol": "SU.PA", "name": "Schneider Electric", "country": "FR"},
+      {"symbol": "ABBN.SW", "name": "ABB", "country": "CH"}
+    ]},
+    {"id": "goes", "group": "전력", "name": "전기강판", "name_en": "GOES (Electrical Steel)", "shortageItems": ["GOES (전기강판)"], "stocks": [
+      {"symbol": "005490.KS", "name": "POSCO홀딩스", "country": "KR"},
+      {"symbol": "5401.T", "name": "Nippon Steel", "country": "JP"},
+      {"symbol": "MT", "name": "ArcelorMittal", "country": "NL"}
+    ]},
+
+    {"id": "uranium", "group": "원자력", "name": "우라늄", "name_en": "Uranium", "shortageItems": ["우라늄 (U3O8)", "농축 우라늄 (SWU)", "HALEU (고농축 우라늄)"], "stocks": [
+      {"symbol": "CCJ", "name": "Cameco", "country": "CA"},
+      {"symbol": "NXE", "name": "NexGen Energy", "country": "CA"},
+      {"symbol": "UEC", "name": "Uranium Energy", "country": "US"},
+      {"symbol": "DNN", "name": "Denison Mines", "country": "CA"},
+      {"symbol": "KAP.L", "name": "Kazatomprom", "country": "KZ"},
+      {"symbol": "PDN.AX", "name": "Paladin Energy", "country": "AU"},
+      {"symbol": "UUUU", "name": "Energy Fuels", "country": "US"}
+    ]},
+    {"id": "nuclear-equip", "group": "원자력", "name": "SMR/원전설비", "name_en": "Nuclear Equipment & SMR", "shortageItems": [], "stocks": [
+      {"symbol": "034020.KS", "name": "두산에너빌리티", "country": "KR"},
+      {"symbol": "SMR", "name": "NuScale Power", "country": "US"},
+      {"symbol": "BWXT", "name": "BWX Technologies", "country": "US"},
+      {"symbol": "OKLO", "name": "Oklo", "country": "US"},
+      {"symbol": "LEU", "name": "Centrus Energy", "country": "US"},
+      {"symbol": "RR.L", "name": "Rolls-Royce", "country": "UK"}
+    ]},
+
+    {"id": "battery-cell", "group": "배터리", "name": "배터리셀", "name_en": "Battery Cell", "shortageItems": ["전해액 (배터리)", "분리막 (배터리)"], "stocks": [
+      {"symbol": "373220.KS", "name": "LG에너지솔루션", "country": "KR"},
+      {"symbol": "006400.KS", "name": "삼성SDI", "country": "KR"},
+      {"symbol": "6752.T", "name": "Panasonic", "country": "JP"},
+      {"symbol": "1211.HK", "name": "BYD", "country": "CN"},
+      {"symbol": "300750.SZ", "name": "CATL", "country": "CN"},
+      {"symbol": "300014.SZ", "name": "EVE Energy", "country": "CN"}
+    ]},
+    {"id": "lithium", "group": "배터리", "name": "리튬", "name_en": "Lithium", "shortageItems": ["리튬 (탄산리튬)"], "stocks": [
+      {"symbol": "ALB", "name": "Albemarle", "country": "US"},
+      {"symbol": "SQM", "name": "SQM", "country": "CL"},
+      {"symbol": "PLS.AX", "name": "Pilbara Minerals", "country": "AU"},
+      {"symbol": "1772.HK", "name": "Ganfeng Lithium", "country": "CN"}
+    ]},
+    {"id": "cathode", "group": "배터리", "name": "양극재/소재", "name_en": "Cathode & Materials", "shortageItems": ["니켈 (Class 1)", "흑연 (천연)", "코발트", "양극재 (NCM)", "음극재 (흑연)"], "stocks": [
+      {"symbol": "247540.KQ", "name": "에코프로비엠", "country": "KR"},
+      {"symbol": "003670.KS", "name": "포스코퓨처엠", "country": "KR"},
+      {"symbol": "066970.KS", "name": "L&F", "country": "KR"}
+    ]},
+
+    {"id": "solar-panel", "group": "태양광", "name": "태양광 셀/모듈", "name_en": "Solar Cell & Module", "shortageItems": ["폴리실리콘", "태양광 셀", "태양광 모듈"], "stocks": [
+      {"symbol": "009830.KS", "name": "한화솔루션", "country": "KR"},
+      {"symbol": "FSLR", "name": "First Solar", "country": "US"},
+      {"symbol": "CSIQ", "name": "Canadian Solar", "country": "CA"},
+      {"symbol": "JKS", "name": "JinkoSolar", "country": "CN"},
+      {"symbol": "601012.SS", "name": "LONGi Green Energy", "country": "CN"},
+      {"symbol": "688599.SS", "name": "Trina Solar", "country": "CN"}
+    ]},
+    {"id": "solar-inverter", "group": "태양광", "name": "태양광 인버터", "name_en": "Solar Inverter", "shortageItems": [], "stocks": [
+      {"symbol": "ENPH", "name": "Enphase", "country": "US"},
+      {"symbol": "SEDG", "name": "SolarEdge", "country": "US"},
+      {"symbol": "S92.DE", "name": "SMA Solar", "country": "DE"}
+    ]},
+
+    {"id": "wind-turbine", "group": "풍력", "name": "풍력터빈", "name_en": "Wind Turbine", "shortageItems": ["풍력 터빈 베어링", "풍력 타워", "풍력 블레이드"], "stocks": [
+      {"symbol": "VWS.CO", "name": "Vestas", "country": "DK"},
+      {"symbol": "NDX1.DE", "name": "Nordex", "country": "DE"},
+      {"symbol": "2208.HK", "name": "Goldwind", "country": "CN"}
+    ]},
+    {"id": "offshore-wind", "group": "풍력", "name": "해상풍력", "name_en": "Offshore Wind", "shortageItems": ["CLV 선박 (케이블 포설)", "HVDC 케이블"], "stocks": [
+      {"symbol": "ORSTED.CO", "name": "Ørsted", "country": "DK"}
+    ]},
+
+    {"id": "rare-earth", "group": "희토류/특수금속", "name": "희토류", "name_en": "Rare Earth", "shortageItems": ["희토류 (NdPr)", "디스프로슘", "터븀"], "stocks": [
+      {"symbol": "MP", "name": "MP Materials", "country": "US"},
+      {"symbol": "LYC.AX", "name": "Lynas Rare Earths", "country": "AU"}
+    ]},
+    {"id": "specialty-metals", "group": "희토류/특수금속", "name": "특수금속", "name_en": "Specialty Metals", "shortageItems": ["갈륨", "게르마늄", "안티몬", "인듐", "텔루륨", "비스무트"], "stocks": [
+      {"symbol": "ILU.AX", "name": "Iluka Resources", "country": "AU"},
+      {"symbol": "VNP.TO", "name": "5N Plus", "country": "CA"},
+      {"symbol": "UMI.BR", "name": "Umicore", "country": "BE"}
+    ]},
+
+    {"id": "copper", "group": "산업금속", "name": "구리", "name_en": "Copper", "shortageItems": ["구리 (Copper)"], "stocks": [
+      {"symbol": "FCX", "name": "Freeport-McMoRan", "country": "US"},
+      {"symbol": "SCCO", "name": "Southern Copper", "country": "US"},
+      {"symbol": "ANTO.L", "name": "Antofagasta", "country": "UK"},
+      {"symbol": "FM.TO", "name": "First Quantum Minerals", "country": "CA"}
+    ]},
+    {"id": "aluminum", "group": "산업금속", "name": "알루미늄", "name_en": "Aluminum", "shortageItems": ["알루미늄", "산화알루미늄 (알루미나)"], "stocks": [
+      {"symbol": "AA", "name": "Alcoa", "country": "US"},
+      {"symbol": "NHY.OL", "name": "Norsk Hydro", "country": "NO"}
+    ]},
+    {"id": "diversified-mining", "group": "산업금속", "name": "다각화광업", "name_en": "Diversified Mining", "shortageItems": ["철광석", "아연", "주석", "납", "망간", "바나듐", "실리콘 메탈"], "stocks": [
+      {"symbol": "BHP", "name": "BHP", "country": "AU"},
+      {"symbol": "RIO", "name": "Rio Tinto", "country": "AU"},
+      {"symbol": "VALE", "name": "Vale", "country": "BR"},
+      {"symbol": "GLEN.L", "name": "Glencore", "country": "UK"},
+      {"symbol": "TECK", "name": "Teck Resources", "country": "CA"}
+    ]},
+
+    {"id": "oil-major", "group": "에너지", "name": "석유메이저", "name_en": "Oil Major", "shortageItems": ["원유 (WTI)", "원유 (Brent)", "가솔린 (RBOB)", "난방유"], "stocks": [
+      {"symbol": "XOM", "name": "ExxonMobil", "country": "US"},
+      {"symbol": "SHEL", "name": "Shell", "country": "UK"},
+      {"symbol": "TTE", "name": "TotalEnergies", "country": "FR"},
+      {"symbol": "CVX", "name": "Chevron", "country": "US"},
+      {"symbol": "BP", "name": "BP", "country": "UK"},
+      {"symbol": "COP", "name": "ConocoPhillips", "country": "US"}
+    ]},
+    {"id": "lng", "group": "에너지", "name": "LNG", "name_en": "LNG", "shortageItems": ["천연가스 (LNG)"], "stocks": [
+      {"symbol": "LNG", "name": "Cheniere Energy", "country": "US"},
+      {"symbol": "WDS", "name": "Woodside Energy", "country": "AU"}
+    ]},
+    {"id": "power-utility", "group": "에너지", "name": "전력유틸", "name_en": "Power Utility", "shortageItems": ["석탄 (열연)"], "stocks": [
+      {"symbol": "015760.KS", "name": "한국전력", "country": "KR"},
+      {"symbol": "NEE", "name": "NextEra Energy", "country": "US"},
+      {"symbol": "DUK", "name": "Duke Energy", "country": "US"},
+      {"symbol": "ENEL.MI", "name": "Enel", "country": "IT"}
+    ]},
+
+    {"id": "defense", "group": "방산", "name": "방산/항공우주", "name_en": "Defense & Aerospace", "shortageItems": ["SRM (고체 로켓 모터)", "155mm 포탄", "티타늄 스폰지"], "stocks": [
+      {"symbol": "012450.KS", "name": "한화에어로스페이스", "country": "KR"},
+      {"symbol": "079550.KS", "name": "LIG넥스원", "country": "KR"},
+      {"symbol": "042660.KS", "name": "한화오션", "country": "KR"},
+      {"symbol": "LMT", "name": "Lockheed Martin", "country": "US"},
+      {"symbol": "RTX", "name": "RTX", "country": "US"},
+      {"symbol": "NOC", "name": "Northrop Grumman", "country": "US"},
+      {"symbol": "LHX", "name": "L3Harris", "country": "US"},
+      {"symbol": "GD", "name": "General Dynamics", "country": "US"},
+      {"symbol": "BA.L", "name": "BAE Systems", "country": "UK"},
+      {"symbol": "RHM.DE", "name": "Rheinmetall", "country": "DE"},
+      {"symbol": "HO.PA", "name": "Thales", "country": "FR"},
+      {"symbol": "LDO.MI", "name": "Leonardo", "country": "IT"}
+    ]},
+
+    {"id": "oled", "group": "디스플레이", "name": "OLED", "name_en": "OLED", "shortageItems": ["OLED 패널"], "stocks": [
+      {"symbol": "034220.KS", "name": "LG디스플레이", "country": "KR"},
+      {"symbol": "OLED", "name": "Universal Display", "country": "US"}
+    ]},
+    {"id": "lcd", "group": "디스플레이", "name": "LCD/LED", "name_en": "LCD & LED", "shortageItems": ["디스플레이 패널", "LED 칩"], "stocks": [
+      {"symbol": "2409.TW", "name": "AU Optronics", "country": "TW"},
+      {"symbol": "6740.T", "name": "Japan Display", "country": "JP"},
+      {"symbol": "3481.TW", "name": "Innolux", "country": "TW"},
+      {"symbol": "000725.SZ", "name": "BOE Technology", "country": "CN"}
+    ]},
+
+    {"id": "cdmo", "group": "바이오", "name": "CDMO", "name_en": "Contract Pharma Manufacturing", "shortageItems": ["의료용 방사성 동위원소", "원료의약품 (API)", "헤파린"], "stocks": [
+      {"symbol": "207940.KS", "name": "삼성바이오로직스", "country": "KR"},
+      {"symbol": "068270.KS", "name": "셀트리온", "country": "KR"},
+      {"symbol": "LONN.SW", "name": "Lonza", "country": "CH"},
+      {"symbol": "2269.HK", "name": "WuXi Biologics", "country": "CN"}
+    ]},
+    {"id": "glp1", "group": "바이오", "name": "GLP-1/비만치료제", "name_en": "GLP-1 & Obesity", "shortageItems": [], "stocks": [
+      {"symbol": "LLY", "name": "Eli Lilly", "country": "US"},
+      {"symbol": "NVO", "name": "Novo Nordisk", "country": "DK"},
+      {"symbol": "ZEAL.CO", "name": "Zealand Pharma", "country": "DK"},
+      {"symbol": "VKTX", "name": "Viking Therapeutics", "country": "US"},
+      {"symbol": "AMGN", "name": "Amgen", "country": "US"}
+    ]},
+
+    {"id": "ev", "group": "자동차", "name": "전기차", "name_en": "Electric Vehicle", "shortageItems": [], "stocks": [
+      {"symbol": "TSLA", "name": "Tesla", "country": "US"},
+      {"symbol": "RIVN", "name": "Rivian", "country": "US"},
+      {"symbol": "NIO", "name": "NIO", "country": "CN"},
+      {"symbol": "XPEV", "name": "XPeng", "country": "CN"},
+      {"symbol": "LI", "name": "Li Auto", "country": "CN"},
+      {"symbol": "1211.HK", "name": "BYD", "country": "CN"}
+    ]},
+    {"id": "auto-oem", "group": "자동차", "name": "완성차", "name_en": "Auto OEM", "shortageItems": [], "stocks": [
+      {"symbol": "005380.KS", "name": "현대자동차", "country": "KR"},
+      {"symbol": "000270.KS", "name": "기아", "country": "KR"},
+      {"symbol": "TM", "name": "Toyota", "country": "JP"},
+      {"symbol": "VOW3.DE", "name": "Volkswagen", "country": "DE"},
+      {"symbol": "GM", "name": "GM", "country": "US"},
+      {"symbol": "F", "name": "Ford", "country": "US"},
+      {"symbol": "BMW.DE", "name": "BMW", "country": "DE"},
+      {"symbol": "MBG.DE", "name": "Mercedes-Benz", "country": "DE"},
+      {"symbol": "STLA", "name": "Stellantis", "country": "NL"}
+    ]},
+
+    {"id": "big-tech", "group": "인터넷/플랫폼", "name": "빅테크", "name_en": "Big Tech", "shortageItems": [], "stocks": [
+      {"symbol": "AAPL", "name": "Apple", "country": "US"},
+      {"symbol": "MSFT", "name": "Microsoft", "country": "US"},
+      {"symbol": "GOOGL", "name": "Alphabet", "country": "US"},
+      {"symbol": "META", "name": "Meta", "country": "US"},
+      {"symbol": "AMZN", "name": "Amazon", "country": "US"}
+    ]},
+    {"id": "asia-platform", "group": "인터넷/플랫폼", "name": "아시아 플랫폼", "name_en": "Asia Platform", "shortageItems": [], "stocks": [
+      {"symbol": "035420.KS", "name": "네이버", "country": "KR"},
+      {"symbol": "035720.KS", "name": "카카오", "country": "KR"},
+      {"symbol": "0700.HK", "name": "Tencent", "country": "CN"},
+      {"symbol": "SE", "name": "Sea Limited", "country": "SG"},
+      {"symbol": "BABA", "name": "Alibaba", "country": "CN"},
+      {"symbol": "PDD", "name": "PDD Holdings", "country": "CN"},
+      {"symbol": "GRAB", "name": "Grab", "country": "SG"}
+    ]},
+
+    {"id": "banks", "group": "금융", "name": "은행/금융", "name_en": "Banks & Financials", "shortageItems": [], "stocks": [
+      {"symbol": "105560.KS", "name": "KB금융", "country": "KR"},
+      {"symbol": "055550.KS", "name": "신한지주", "country": "KR"},
+      {"symbol": "086790.KS", "name": "하나금융", "country": "KR"},
+      {"symbol": "JPM", "name": "JP Morgan", "country": "US"},
+      {"symbol": "BAC", "name": "Bank of America", "country": "US"},
+      {"symbol": "GS", "name": "Goldman Sachs", "country": "US"},
+      {"symbol": "HSBC", "name": "HSBC", "country": "UK"},
+      {"symbol": "MUFG", "name": "MUFG", "country": "JP"},
+      {"symbol": "UBSG.SW", "name": "UBS", "country": "CH"},
+      {"symbol": "D05.SI", "name": "DBS Group", "country": "SG"}
+    ]}
   ],
   "schedule": {
     "cron": "0 6 * * 1-5",
