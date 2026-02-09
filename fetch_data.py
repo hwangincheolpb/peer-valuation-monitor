@@ -149,6 +149,7 @@ def format_market_cap(mc):
 
 
 def _calc_peer_avg(stocks: list) -> dict:
+    GROWTH_CAP = 10  # ±1000% — exclude extreme base-effect outliers
     metrics = [
         "forwardPE", "trailingPE", "priceToBook", "enterpriseToEbitda",
         "dividendYield", "returnOnEquity", "fwd1y_growth", "targetUpside",
@@ -157,6 +158,8 @@ def _calc_peer_avg(stocks: list) -> dict:
     avg = {}
     for m in metrics:
         values = [s[m] for s in stocks if s.get(m) is not None]
+        if m == "fwd1y_growth":
+            values = [v for v in values if abs(v) <= GROWTH_CAP]
         if values:
             avg[m] = round(sum(values) / len(values), 4)
             values_sorted = sorted(values)

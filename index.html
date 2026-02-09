@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Peer Valuation Monitor</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -92,6 +93,13 @@
             <!-- Summary Cards -->
             <div class="px-6 py-3">
                 <div id="summaryCards" class="grid grid-cols-5 gap-3"></div>
+            </div>
+
+            <!-- Chart -->
+            <div class="px-6 pb-3">
+                <div id="chartContainer" class="bg-surface rounded-lg border border-border p-4" style="height:340px; position:relative;">
+                    <canvas id="scatterChart"></canvas>
+                </div>
             </div>
 
             <!-- Table -->
@@ -218,6 +226,9 @@ function renderCategory(idx) {
     // Summary
     renderSummary(cat);
 
+    // Chart
+    renderScatter(cat.stocks || [], (cat.peerAvg || {}).forwardPE);
+
     // Table
     renderTable(cat);
 }
@@ -343,7 +354,8 @@ function fmt(val, format) {
         }
         case 'ratioSigned': {
             const v = val * 100;
-            if (Math.abs(v) > 999) return (v > 0 ? '+' : '') + Math.round(v).toLocaleString() + '%';
+            if (v > 999) return '>999%';
+            if (v < -999) return '<-999%';
             return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
         }
         case 'directPct': {
@@ -413,6 +425,9 @@ function renderGroupView(groupName) {
     const combinedAvg = calcPeerAvgJS(allStocks);
     renderSummary({ peerAvg: combinedAvg });
 
+    // Chart
+    renderScatter(allStocks, combinedAvg.forwardPE);
+
     // grouped table
     document.getElementById('tableHead').innerHTML = '<tr>' + COLUMNS.map(col =>
         `<th class="px-3 py-2 text-xs font-medium text-muted bg-surface border-b border-border
@@ -467,9 +482,11 @@ function renderGroupView(groupName) {
 function calcPeerAvgJS(stocks) {
     const metrics = ['forwardPE','trailingPE','priceToBook','enterpriseToEbitda',
         'dividendYield','returnOnEquity','fwd1y_growth','targetUpside','epsRevision30d'];
+    const GROWTH_CAP = 10; // ±1000%
     const avg = {};
     for (const m of metrics) {
-        const vals = stocks.map(s => s[m]).filter(v => v != null);
+        let vals = stocks.map(s => s[m]).filter(v => v != null);
+        if (m === 'fwd1y_growth') vals = vals.filter(v => Math.abs(v) <= GROWTH_CAP);
         if (vals.length) {
             avg[m] = vals.reduce((a, b) => a + b, 0) / vals.length;
             const sorted = [...vals].sort((a, b) => a - b);
@@ -478,6 +495,98 @@ function calcPeerAvgJS(stocks) {
         }
     }
     return avg;
+}
+
+let scatterChart = null;
+
+function renderScatter(stocks, avgPE) {
+    const canvas = document.getElementById('scatterChart');
+    if (scatterChart) { scatterChart.destroy(); scatterChart = null; }
+
+    const GROWTH_CAP = 10;
+    const points = stocks
+        .filter(s => !s.error && s.forwardPE != null && s.fwd1y_growth != null && Math.abs(s.fwd1y_growth) <= GROWTH_CAP)
+        .map(s => ({
+            x: s.fwd1y_growth * 100,
+            y: s.forwardPE,
+            label: s.name,
+            symbol: s.symbol,
+            country: s.country,
+        }));
+
+    if (points.length < 2) {
+        document.getElementById('chartContainer').style.display = 'none';
+        return;
+    }
+    document.getElementById('chartContainer').style.display = '';
+
+    scatterChart = new Chart(canvas, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                data: points,
+                backgroundColor: points.map(p => {
+                    if (avgPE && p.y < avgPE && p.x > 0) return '#22c55e99';
+                    if (avgPE && p.y > avgPE && p.x < 0) return '#ef444499';
+                    return '#3b82f699';
+                }),
+                borderColor: points.map(p => {
+                    if (avgPE && p.y < avgPE && p.x > 0) return '#22c55e';
+                    if (avgPE && p.y > avgPE && p.x < 0) return '#ef4444';
+                    return '#3b82f6';
+                }),
+                borderWidth: 1.5,
+                pointRadius: 6,
+                pointHoverRadius: 9,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => {
+                            const p = ctx.raw;
+                            return `${p.label} (${p.symbol}) — P/E ${p.y.toFixed(1)}, EPS Growth ${p.x > 0 ? '+' : ''}${p.x.toFixed(1)}%`;
+                        }
+                    },
+                    backgroundColor: '#1a1d29',
+                    titleColor: '#e5e7eb',
+                    bodyColor: '#e5e7eb',
+                    borderColor: '#2a2d3a',
+                    borderWidth: 1,
+                },
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'EPS Growth (FY+1, %)', color: '#6b7280', font: { size: 11 } },
+                    grid: { color: '#2a2d3a40' },
+                    ticks: { color: '#6b7280', callback: v => v + '%' },
+                },
+                y: {
+                    title: { display: true, text: 'Forward P/E', color: '#6b7280', font: { size: 11 } },
+                    grid: { color: '#2a2d3a40' },
+                    ticks: { color: '#6b7280' },
+                    reverse: false,
+                },
+            },
+        },
+        plugins: [{
+            id: 'dataLabels',
+            afterDatasetsDraw(chart) {
+                const ctx = chart.ctx;
+                ctx.font = '10px -apple-system, sans-serif';
+                ctx.fillStyle = '#9ca3af';
+                ctx.textAlign = 'center';
+                chart.data.datasets[0].data.forEach((p, i) => {
+                    const meta = chart.getDatasetMeta(0).data[i];
+                    if (meta) ctx.fillText(p.label, meta.x, meta.y - 10);
+                });
+            }
+        }]
+    });
 }
 
 loadData();
