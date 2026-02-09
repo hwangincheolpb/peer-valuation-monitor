@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Peer Valuation Monitor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#0f1117', surface: '#1a1d29', surface2: '#22253a',
+                        border: '#2a2d3a', muted: '#6b7280',
+                        cheap: '#22c55e', expensive: '#ef4444', neutral: '#f59e0b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+        body { background: #0f1117; color: #e5e7eb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin:0; }
+        .sidebar { width: 240px; min-width: 240px; height: 100vh; overflow-y: auto; position: sticky; top: 0; }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: #2a2d3a; border-radius: 2px; }
+        .cat-item { padding: 8px 16px; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; font-size: 13px; }
+        .cat-item:hover { background: #1a1d29; }
+        .cat-item.active { background: #1a1d29; border-left-color: #3b82f6; color: white; }
+        .alert-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; flex-shrink: 0; }
+        .alert-red { background: #ef4444; box-shadow: 0 0 6px #ef444466; }
+        .alert-yellow { background: #f59e0b; }
+        .alert-green { background: #22c55e; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; }
+        th { position: sticky; top: 0; z-index: 10; cursor: pointer; user-select: none; }
+        th:hover { background: #22253a !important; }
+        .sort-icon { opacity: 0.3; font-size: 10px; }
+        th:hover .sort-icon, th.sorted .sort-icon { opacity: 1; }
+        tr:hover td { background: #1e2130; }
+        .metric-cell { font-variant-numeric: tabular-nums; }
+        .revision-up { color: #22c55e; }
+        .revision-down { color: #ef4444; }
+        .peer-avg-row td { border-top: 2px solid #3b82f6; font-weight: 600; background: #151825 !important; }
+        .shortage-chip { font-size: 11px; padding: 2px 8px; border-radius: 10px; display: inline-flex; align-items: center; gap: 4px; }
+        .shortage-chip.red { background: #ef444420; color: #ef4444; border: 1px solid #ef444440; }
+        .shortage-chip.yellow { background: #f59e0b20; color: #f59e0b; border: 1px solid #f59e0b40; }
+        .shortage-chip.green { background: #22c55e20; color: #22c55e; border: 1px solid #22c55e40; }
+        .shortage-detail { font-size: 12px; padding: 6px 10px; background: #151825; border-radius: 6px; border: 1px solid #2a2d3a; }
+        .stat-card { background: #1a1d29; border: 1px solid #2a2d3a; border-radius: 8px; padding: 12px 16px; }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="sidebar border-r border-border bg-bg">
+            <div class="px-4 py-4 border-b border-border">
+                <h1 class="text-sm font-bold text-white tracking-wide">PEER VALUATION</h1>
+                <p class="text-xs text-muted mt-0.5">Global Supply-Valuation Monitor</p>
+            </div>
+            <div id="sidebarList" class="py-2"></div>
+            <div class="px-4 py-3 border-t border-border text-xs text-muted">
+                <div id="lastUpdated">Loading...</div>
+                <div id="stockCount" class="mt-1"></div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="flex-1 overflow-auto h-screen">
+            <!-- Category Header -->
+            <div class="px-6 py-4 border-b border-border bg-surface/50 sticky top-0 z-20 backdrop-blur">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 id="catTitle" class="text-lg font-bold text-white"></h2>
+                        <span id="catTitleEn" class="text-sm text-muted"></span>
+                    </div>
+                    <div id="shortageChips" class="flex gap-2 flex-wrap"></div>
+                </div>
+            </div>
+
+            <!-- Shortage Detail -->
+            <div id="shortageDetail" class="px-6 pt-3 hidden">
+                <div class="flex gap-2 overflow-x-auto pb-2" id="shortageCards"></div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="px-6 py-3">
+                <div id="summaryCards" class="grid grid-cols-5 gap-3"></div>
+            </div>
+
+            <!-- Table -->
+            <div class="px-6 pb-6">
+                <div class="overflow-x-auto rounded-lg border border-border">
+                    <table class="text-sm" id="dataTable">
+                        <thead id="tableHead"></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <div class="mt-3 flex gap-6 text-xs text-muted">
+                    <span><span class="inline-block w-2.5 h-2.5 rounded bg-cheap mr-1 align-middle"></span>피어 평균 대비 저평가</span>
+                    <span><span class="inline-block w-2.5 h-2.5 rounded bg-expensive mr-1 align-middle"></span>피어 평균 대비 고평가</span>
+                    <span>EPS Rev: 30일간 consensus EPS 변화율</span>
+                    <span>Source: Yahoo Finance (S&P Global) + Structural Shortage Dashboard</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script>
+const DATA_URL = 'data/valuation-data.json';
+const FLAGS = {KR:'🇰🇷',US:'🇺🇸',TW:'🇹🇼',JP:'🇯🇵',NL:'🇳🇱',UK:'🇬🇧',DE:'🇩🇪',SG:'🇸🇬',DK:'🇩🇰',CH:'🇨🇭',FR:'🇫🇷',CN:'🇨🇳',CA:'🇨🇦',AU:'🇦🇺',BR:'🇧🇷',CL:'🇨🇱',BE:'🇧🇪'};
+
+const COLUMNS = [
+    { key: 'name', label: '종목', align: 'left', w: 'min-w-[180px]' },
+    { key: 'currentPrice', label: '현재가', align: 'right', format: 'price' },
+    { key: 'marketCapFormatted', label: '시총', align: 'right' },
+    { key: 'forwardPE', label: 'Fwd P/E', align: 'right', format: '1f', colorMode: 'pe' },
+    { key: 'trailingPE', label: 'Trail P/E', align: 'right', format: '1f' },
+    { key: 'priceToBook', label: 'P/B', align: 'right', format: '2f' },
+    { key: 'enterpriseToEbitda', label: 'EV/EBITDA', align: 'right', format: '1f', colorMode: 'pe' },
+    { key: 'returnOnEquity', label: 'ROE', align: 'right', format: 'pct' },
+    { key: 'dividendYield', label: '배당률', align: 'right', format: 'pct' },
+    { key: 'fwd1y_growth', label: 'EPS 성장', align: 'right', format: 'ratioSigned', colorMode: 'growth' },
+    { key: 'epsRevision30d', label: 'EPS Rev', align: 'right', format: 'directPct', colorMode: 'revision' },
+    { key: 'targetUpside', label: 'TP 괴리', align: 'right', format: 'directPct', colorMode: 'revision' },
+    { key: 'fwd1y_numAnalysts', label: '애널', align: 'center', format: 'd' },
+];
+
+let allData = null;
+let currentCat = 0;
+let sortCol = 'forwardPE';
+let sortAsc = true;
+
+async function loadData() {
+    try {
+        const resp = await fetch(DATA_URL);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        allData = await resp.json();
+        renderSidebar();
+        renderCategory(0);
+        renderMeta();
+    } catch (e) {
+        document.getElementById('tableBody').innerHTML =
+            `<tr><td colspan="13" class="text-center py-12 text-muted">
+                데이터 로드 실패. <code>python3 fetch_data.py</code> 먼저 실행하세요.
+            </td></tr>`;
+    }
+}
+
+function renderMeta() {
+    const dt = new Date(allData.fetchedAt);
+    document.getElementById('lastUpdated').textContent =
+        `${dt.toLocaleDateString('ko-KR')} ${dt.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'})}`;
+    document.getElementById('stockCount').textContent =
+        `${allData.successCount}/${allData.totalStocks} stocks`;
+}
+
+function renderSidebar() {
+    const el = document.getElementById('sidebarList');
+    el.innerHTML = allData.categories.map((cat, i) => {
+        const alert = cat.alertSummary;
+        const dot = alert ? `<span class="alert-dot alert-${alert}"></span>` : '<span style="width:14px;display:inline-block"></span>';
+        const badge = cat.shortageCount
+            ? `<span class="text-xs px-1.5 py-0.5 rounded-full ml-auto
+                ${alert === 'red' ? 'bg-red-500/20 text-red-400' : alert === 'yellow' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'}"
+              >${cat.shortageCount}</span>`
+            : '';
+        return `<div class="cat-item flex items-center ${i === 0 ? 'active' : ''}" data-idx="${i}" onclick="renderCategory(${i})">
+            ${dot}<span class="truncate">${cat.name}</span>${badge}
+        </div>`;
+    }).join('');
+}
+
+function renderCategory(idx) {
+    currentCat = idx;
+    document.querySelectorAll('.cat-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+
+    const cat = allData.categories[idx];
+
+    // Header
+    document.getElementById('catTitle').textContent = cat.name;
+    document.getElementById('catTitleEn').textContent = cat.name_en;
+
+    // Shortage chips
+    renderShortageChips(cat);
+
+    // Shortage detail cards
+    renderShortageDetail(cat);
+
+    // Summary
+    renderSummary(cat);
+
+    // Table
+    renderTable(cat);
+}
+
+function renderShortageChips(cat) {
+    const el = document.getElementById('shortageChips');
+    if (!cat.shortage || cat.shortage.length === 0) {
+        el.innerHTML = '<span class="text-xs text-muted">쇼티지 데이터 없음</span>';
+        return;
+    }
+    el.innerHTML = cat.shortage.map(s =>
+        `<span class="shortage-chip ${s.alertLevel}">
+            <span class="alert-dot alert-${s.alertLevel}" style="margin:0"></span>
+            ${s.name}
+        </span>`
+    ).join('');
+}
+
+function renderShortageDetail(cat) {
+    const container = document.getElementById('shortageDetail');
+    const cards = document.getElementById('shortageCards');
+    if (!cat.shortage || cat.shortage.length === 0) {
+        container.classList.add('hidden');
+        return;
+    }
+    container.classList.remove('hidden');
+    cards.innerHTML = cat.shortage.map(s => {
+        const items = [
+            s.priceYoY != null ? `가격 YoY <b>+${s.priceYoY}%</b>` : null,
+            s.utilization != null ? `가동률 <b>${s.utilization}%</b>` : null,
+            s.inventory != null ? `재고 <b>${s.inventory}개월</b>` : null,
+            s.leadTime != null ? `리드타임 <b>${s.leadTime}년</b>` : null,
+        ].filter(Boolean).join(' · ');
+        return `<div class="shortage-detail flex-shrink-0">
+            <span class="alert-dot alert-${s.alertLevel}"></span>
+            <b>${s.name}</b>
+            <span class="text-muted ml-2">${items}</span>
+        </div>`;
+    }).join('');
+}
+
+function renderSummary(cat) {
+    const avg = cat.peerAvg || {};
+    const cards = [
+        { label: 'Fwd P/E', value: fmt(avg.forwardPE, '1f'), sub: `med ${fmt(avg.forwardPE_median, '1f')}` },
+        { label: 'EV/EBITDA', value: fmt(avg.enterpriseToEbitda, '1f'), sub: `med ${fmt(avg.enterpriseToEbitda_median, '1f')}` },
+        { label: 'EPS Growth', value: fmt(avg.fwd1y_growth, 'ratioSigned'), sub: '+1Y consensus' },
+        { label: 'EPS Revision', value: fmt(avg.epsRevision30d, 'directPct'), sub: '30d change' },
+        { label: 'TP Upside', value: fmt(avg.targetUpside, 'directPct'), sub: 'vs mean target' },
+    ];
+    document.getElementById('summaryCards').innerHTML = cards.map(c => {
+        const color = c.label.includes('EPS') || c.label.includes('TP')
+            ? (parseVal(c.value) > 0 ? 'text-cheap' : parseVal(c.value) < 0 ? 'text-expensive' : 'text-white')
+            : 'text-white';
+        return `<div class="stat-card">
+            <div class="text-xs text-muted">${c.label}</div>
+            <div class="text-lg font-bold ${color} mt-1">${c.value || '-'}</div>
+            <div class="text-xs text-muted mt-0.5">${c.sub || ''}</div>
+        </div>`;
+    }).join('');
+}
+
+function parseVal(str) {
+    if (!str || str === '-') return 0;
+    return parseFloat(str.replace(/[+%,<>]/g, '')) || 0;
+}
+
+function renderTable(cat) {
+    document.getElementById('tableHead').innerHTML = '<tr>' + COLUMNS.map(col =>
+        `<th class="px-3 py-2 text-xs font-medium text-muted bg-surface border-b border-border
+                    text-${col.align} ${col.w || ''} ${sortCol === col.key ? 'sorted' : ''}"
+            onclick="toggleSort('${col.key}')">
+            ${col.label} <span class="sort-icon">${sortCol === col.key ? (sortAsc ? '▲' : '▼') : '↕'}</span>
+        </th>`
+    ).join('') + '</tr>';
+
+    let stocks = [...cat.stocks].filter(s => !s.error);
+    stocks.sort((a, b) => {
+        let va = a[sortCol], vb = b[sortCol];
+        if (va == null && vb == null) return 0;
+        if (va == null) return 1;
+        if (vb == null) return -1;
+        if (typeof va === 'string') return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+        return sortAsc ? va - vb : vb - va;
+    });
+
+    const avg = cat.peerAvg || {};
+
+    const rows = stocks.map(stock =>
+        '<tr class="border-b border-border/30">' + COLUMNS.map(col => {
+            const val = stock[col.key];
+            if (col.key === 'name') {
+                const flag = FLAGS[stock.country] || '';
+                return `<td class="px-3 py-2 text-left ${col.w || ''}">
+                    <span class="text-xs">${flag}</span>
+                    <span class="font-medium text-white">${stock.name}</span>
+                    <span class="text-muted text-xs ml-1">${stock.symbol}</span>
+                </td>`;
+            }
+            const display = fmt(val, col.format, stock.currency);
+            const color = getColor(col, val, avg);
+            return `<td class="px-3 py-2 text-${col.align} metric-cell ${color}">${display}</td>`;
+        }).join('') + '</tr>'
+    ).join('');
+
+    const avgRow = '<tr class="peer-avg-row">' + COLUMNS.map(col => {
+        if (col.key === 'name') return '<td class="px-3 py-2 text-left text-blue-400">Peer Average</td>';
+        return `<td class="px-3 py-2 text-${col.align} metric-cell">${fmt(avg[col.key], col.format)}</td>`;
+    }).join('') + '</tr>';
+
+    document.getElementById('tableBody').innerHTML = rows + avgRow;
+}
+
+function fmt(val, format) {
+    if (val == null || val === undefined) return '<span class="text-muted">-</span>';
+    switch (format) {
+        case '1f': return Number(val).toFixed(1);
+        case '2f': return Number(val).toFixed(2);
+        case 'd': return Math.round(val).toString();
+        case 'pct': {
+            const v = val * 100;
+            return v.toFixed(1) + '%';
+        }
+        case 'ratioSigned': {
+            const v = val * 100;
+            if (Math.abs(v) > 999) return (v > 0 ? '+' : '') + Math.round(v).toLocaleString() + '%';
+            return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+        }
+        case 'directPct': {
+            return (val > 0 ? '+' : '') + Number(val).toFixed(1) + '%';
+        }
+        case 'price': {
+            if (val >= 10000) return Number(val).toLocaleString('ko-KR', { maximumFractionDigits: 0 });
+            if (val >= 100) return Number(val).toFixed(1);
+            return Number(val).toFixed(2);
+        }
+        default: return String(val);
+    }
+}
+
+function getColor(col, val, avg) {
+    if (val == null || !col.colorMode) return '';
+    if (col.colorMode === 'pe') {
+        const a = avg[col.key];
+        if (a == null) return '';
+        if (val < a * 0.85) return 'text-cheap font-medium';
+        if (val > a * 1.15) return 'text-expensive';
+        return '';
+    }
+    if (col.colorMode === 'growth') {
+        const v = val * 100;
+        if (v > 5) return 'revision-up';
+        if (v < -5) return 'revision-down';
+        return '';
+    }
+    if (col.colorMode === 'revision') {
+        if (val > 2) return 'revision-up';
+        if (val < -2) return 'revision-down';
+        return '';
+    }
+    return '';
+}
+
+function toggleSort(key) {
+    if (sortCol === key) sortAsc = !sortAsc;
+    else { sortCol = key; sortAsc = true; }
+    renderCategory(currentCat);
+}
+
+loadData();
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+#!/usr/bin/env python3
+"""
+Global Peer Valuation Monitor - Data Fetcher
+yfinance 밸류에이션 + structural-shortage 데이터 통합
+"""
+
+import json
+import time
+import sys
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+
+import yfinance as yf
+
+BASE_DIR = Path(__file__).parent
+CONFIG_PATH = BASE_DIR / "config.json"
+OUTPUT_PATH = BASE_DIR / "data" / "valuation-data.json"
+
+KST = timezone(timedelta(hours=9))
+
+
+def load_config():
+    with open(CONFIG_PATH) as f:
+        return json.load(f)
+
+
+def load_shortage_data(config):
+    """쇼티지 대시보드 데이터를 로드하여 아이템명 → 데이터 맵 반환."""
+    shortage_path = BASE_DIR / config.get("shortagePath", "")
+    if not shortage_path.exists():
+        print(f"  Shortage data not found: {shortage_path}")
+        return {}
+
+    with open(shortage_path) as f:
+        data = json.load(f)
+
+    item_map = {}
+    for item in data.get("items", []):
+        item_map[item["name"]] = {
+            "alertLevel": item.get("alertLevel"),
+            "priceYoY": item.get("priceYoY"),
+            "utilization": item.get("utilization"),
+            "inventory": item.get("inventory"),
+            "leadTime": item.get("leadTime"),
+            "category": item.get("category"),
+            "priceData": item.get("priceData"),
+        }
+    return item_map
+
+
+def fetch_stock_data(symbol: str) -> dict:
+    """단일 종목의 밸류에이션 데이터를 수집."""
+    ticker = yf.Ticker(symbol)
+    info = ticker.info
+
+    result = {
+        "symbol": symbol,
+        "currentPrice": info.get("currentPrice"),
+        "currency": info.get("currency"),
+        "marketCap": info.get("marketCap"),
+        "forwardPE": info.get("forwardPE"),
+        "trailingPE": info.get("trailingPE"),
+        "priceToBook": info.get("priceToBook"),
+        "enterpriseToEbitda": info.get("enterpriseToEbitda"),
+        "dividendYield": info.get("dividendYield"),
+        "returnOnEquity": info.get("returnOnEquity"),
+        "forwardEps": info.get("forwardEps"),
+        "trailingEps": info.get("trailingEps"),
+        "targetMeanPrice": info.get("targetMeanPrice"),
+        "targetMedianPrice": info.get("targetMedianPrice"),
+        "numberOfAnalystOpinions": info.get("numberOfAnalystOpinions"),
+        "recommendationMean": info.get("recommendationMean"),
+    }
+
+    # earnings_estimate에서 forward consensus
+    try:
+        ee = ticker.earnings_estimate
+        if ee is not None and not ee.empty:
+            for period in ["0y", "+1y"]:
+                if period in ee.index:
+                    row = ee.loc[period]
+                    prefix = "fwd0y" if period == "0y" else "fwd1y"
+                    result[f"{prefix}_epsAvg"] = _safe_float(row.get("avg"))
+                    result[f"{prefix}_epsLow"] = _safe_float(row.get("low"))
+                    result[f"{prefix}_epsHigh"] = _safe_float(row.get("high"))
+                    result[f"{prefix}_numAnalysts"] = _safe_int(row.get("numberOfAnalysts"))
+                    result[f"{prefix}_growth"] = _safe_float(row.get("growth"))
+    except Exception:
+        pass
+
+    # EPS revision (30일 전 대비)
+    try:
+        et = ticker.eps_trend
+        if et is not None and not et.empty and "+1y" in et.index:
+            row = et.loc["+1y"]
+            current = _safe_float(row.get("current"))
+            ago_30d = _safe_float(row.get("30daysAgo"))
+            if current is not None and ago_30d is not None and ago_30d != 0:
+                result["epsRevision30d"] = round((current - ago_30d) / abs(ago_30d) * 100, 2)
+    except Exception:
+        pass
+
+    # target upside
+    price = result.get("currentPrice")
+    target = result.get("targetMeanPrice")
+    if price and target and price > 0:
+        result["targetUpside"] = round((target - price) / price * 100, 2)
+
+    # forward P/E 보정
+    if result.get("forwardPE") is None and price and result.get("fwd1y_epsAvg"):
+        eps = result["fwd1y_epsAvg"]
+        if eps > 0:
+            result["forwardPE"] = round(price / eps, 2)
+
+    return result
+
+
+def _safe_float(val):
+    if val is None:
+        return None
+    try:
+        f = float(val)
+        if f != f:
+            return None
+        return round(f, 4)
+    except (ValueError, TypeError):
+        return None
+
+
+def _safe_int(val):
+    if val is None:
+        return None
+    try:
+        return int(val)
+    except (ValueError, TypeError):
+        return None
+
+
+def format_market_cap(mc):
+    if mc is None:
+        return None
+    if mc >= 1e12:
+        return f"${mc/1e12:.1f}T"
+    if mc >= 1e9:
+        return f"${mc/1e9:.1f}B"
+    if mc >= 1e6:
+        return f"${mc/1e6:.0f}M"
+    return str(mc)
+
+
+def _calc_peer_avg(stocks: list) -> dict:
+    metrics = [
+        "forwardPE", "trailingPE", "priceToBook", "enterpriseToEbitda",
+        "dividendYield", "returnOnEquity", "fwd1y_growth", "targetUpside",
+        "epsRevision30d",
+    ]
+    avg = {}
+    for m in metrics:
+        values = [s[m] for s in stocks if s.get(m) is not None]
+        if values:
+            avg[m] = round(sum(values) / len(values), 4)
+            values_sorted = sorted(values)
+            mid = len(values_sorted) // 2
+            if len(values_sorted) % 2 == 0 and len(values_sorted) >= 2:
+                avg[f"{m}_median"] = round((values_sorted[mid - 1] + values_sorted[mid]) / 2, 4)
+            else:
+                avg[f"{m}_median"] = values_sorted[mid]
+    return avg
+
+
+def main():
+    config = load_config()
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    # 쇼티지 데이터 로드
+    print("Loading shortage data...")
+    shortage_map = load_shortage_data(config)
+    print(f"  {len(shortage_map)} shortage items loaded")
+
+    total_stocks = sum(len(c["stocks"]) for c in config["categories"])
+    print(f"\nFetching {total_stocks} stocks across {len(config['categories'])} categories...")
+
+    output = {
+        "fetchedAt": datetime.now(KST).isoformat(),
+        "categories": [],
+    }
+
+    count = 0
+    errors = []
+
+    for cat in config["categories"]:
+        cat_data = {
+            "id": cat["id"],
+            "name": cat["name"],
+            "name_en": cat["name_en"],
+            "stocks": [],
+            "shortage": [],
+        }
+
+        # 쇼티지 아이템 매칭
+        for item_name in cat.get("shortageItems", []):
+            if item_name in shortage_map:
+                s = shortage_map[item_name]
+                cat_data["shortage"].append({
+                    "name": item_name,
+                    "alertLevel": s["alertLevel"],
+                    "priceYoY": s.get("priceYoY"),
+                    "utilization": s.get("utilization"),
+                    "inventory": s.get("inventory"),
+                    "leadTime": s.get("leadTime"),
+                })
+
+        # 카테고리 전체 쇼티지 요약
+        alerts = [s["alertLevel"] for s in cat_data["shortage"]]
+        if alerts:
+            if "red" in alerts:
+                cat_data["alertSummary"] = "red"
+            elif "yellow" in alerts:
+                cat_data["alertSummary"] = "yellow"
+            else:
+                cat_data["alertSummary"] = "green"
+            cat_data["shortageCount"] = len(alerts)
+
+        # 주식 데이터 수집
+        for stock_cfg in cat["stocks"]:
+            count += 1
+            symbol = stock_cfg["symbol"]
+            name = stock_cfg["name"]
+            print(f"  [{count}/{total_stocks}] {name} ({symbol})...", end=" ", flush=True)
+
+            try:
+                data = fetch_stock_data(symbol)
+                data["name"] = name
+                data["country"] = stock_cfg["country"]
+                data["marketCapFormatted"] = format_market_cap(data.get("marketCap"))
+                cat_data["stocks"].append(data)
+                print("OK")
+            except Exception as e:
+                print(f"ERROR: {e}")
+                errors.append({"symbol": symbol, "name": name, "error": str(e)})
+                cat_data["stocks"].append({
+                    "symbol": symbol,
+                    "name": name,
+                    "country": stock_cfg["country"],
+                    "error": str(e),
+                })
+
+            time.sleep(1.5)
+
+        # 피어 평균
+        valid = [s for s in cat_data["stocks"] if "error" not in s]
+        if valid:
+            cat_data["peerAvg"] = _calc_peer_avg(valid)
+
+        output["categories"].append(cat_data)
+
+    output["errors"] = errors
+    output["totalStocks"] = total_stocks
+    output["successCount"] = total_stocks - len(errors)
+
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+
+    print(f"\nDone! {output['successCount']}/{total_stocks} stocks fetched.")
+    print(f"Errors: {len(errors)}")
+    print(f"Output: {OUTPUT_PATH}")
+
+
+if __name__ == "__main__":
+    main()
