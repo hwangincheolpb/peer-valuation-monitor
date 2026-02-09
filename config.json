@@ -82,7 +82,7 @@
       {"symbol": "ENTG", "name": "Entegris", "country": "US"}
     ]},
 
-    {"id": "transformer", "group": "전력", "name": "변압기", "name_en": "Transformer", "shortageItems": ["대형 변압기"], "stocks": [
+    {"id": "transformer", "group": "전력인프라", "name": "변압기", "name_en": "Transformer", "shortageItems": ["대형 변압기"], "stocks": [
       {"symbol": "267260.KS", "name": "HD현대일렉트릭", "country": "KR"},
       {"symbol": "010120.KS", "name": "LS ELECTRIC", "country": "KR"},
       {"symbol": "ETN", "name": "Eaton", "country": "US"},
@@ -91,10 +91,16 @@
       {"symbol": "SU.PA", "name": "Schneider Electric", "country": "FR"},
       {"symbol": "ABBN.SW", "name": "ABB", "country": "CH"}
     ]},
-    {"id": "goes", "group": "전력", "name": "전기강판", "name_en": "GOES (Electrical Steel)", "shortageItems": ["GOES (전기강판)"], "stocks": [
+    {"id": "goes", "group": "전력인프라", "name": "전기강판", "name_en": "GOES (Electrical Steel)", "shortageItems": ["GOES (전기강판)"], "stocks": [
       {"symbol": "005490.KS", "name": "POSCO홀딩스", "country": "KR"},
       {"symbol": "5401.T", "name": "Nippon Steel", "country": "JP"},
       {"symbol": "MT", "name": "ArcelorMittal", "country": "NL"}
+    ]},
+    {"id": "power-utility", "group": "전력인프라", "name": "전력유틸", "name_en": "Power Utility", "shortageItems": ["석탄 (열연)"], "stocks": [
+      {"symbol": "015760.KS", "name": "한국전력", "country": "KR"},
+      {"symbol": "NEE", "name": "NextEra Energy", "country": "US"},
+      {"symbol": "DUK", "name": "Duke Energy", "country": "US"},
+      {"symbol": "ENEL.MI", "name": "Enel", "country": "IT"}
     ]},
 
     {"id": "uranium", "group": "원자력", "name": "우라늄", "name_en": "Uranium", "shortageItems": ["우라늄 (U3O8)", "농축 우라늄 (SWU)", "HALEU (고농축 우라늄)"], "stocks": [
@@ -198,26 +204,24 @@
       {"symbol": "LNG", "name": "Cheniere Energy", "country": "US"},
       {"symbol": "WDS", "name": "Woodside Energy", "country": "AU"}
     ]},
-    {"id": "power-utility", "group": "에너지", "name": "전력유틸", "name_en": "Power Utility", "shortageItems": ["석탄 (열연)"], "stocks": [
-      {"symbol": "015760.KS", "name": "한국전력", "country": "KR"},
-      {"symbol": "NEE", "name": "NextEra Energy", "country": "US"},
-      {"symbol": "DUK", "name": "Duke Energy", "country": "US"},
-      {"symbol": "ENEL.MI", "name": "Enel", "country": "IT"}
-    ]},
 
-    {"id": "defense", "group": "방산", "name": "방산/항공우주", "name_en": "Defense & Aerospace", "shortageItems": ["SRM (고체 로켓 모터)", "155mm 포탄", "티타늄 스폰지"], "stocks": [
+    {"id": "defense-aero", "group": "방산", "name": "전투기/항공우주", "name_en": "Aircraft & Aerospace", "shortageItems": ["SRM (고체 로켓 모터)", "티타늄 스폰지"], "stocks": [
       {"symbol": "012450.KS", "name": "한화에어로스페이스", "country": "KR"},
-      {"symbol": "079550.KS", "name": "LIG넥스원", "country": "KR"},
-      {"symbol": "042660.KS", "name": "한화오션", "country": "KR"},
       {"symbol": "LMT", "name": "Lockheed Martin", "country": "US"},
-      {"symbol": "RTX", "name": "RTX", "country": "US"},
       {"symbol": "NOC", "name": "Northrop Grumman", "country": "US"},
-      {"symbol": "LHX", "name": "L3Harris", "country": "US"},
-      {"symbol": "GD", "name": "General Dynamics", "country": "US"},
       {"symbol": "BA.L", "name": "BAE Systems", "country": "UK"},
-      {"symbol": "RHM.DE", "name": "Rheinmetall", "country": "DE"},
-      {"symbol": "HO.PA", "name": "Thales", "country": "FR"},
       {"symbol": "LDO.MI", "name": "Leonardo", "country": "IT"}
+    ]},
+    {"id": "defense-missile", "group": "방산", "name": "미사일/전자전", "name_en": "Missiles & Defense Electronics", "shortageItems": [], "stocks": [
+      {"symbol": "RTX", "name": "RTX", "country": "US"},
+      {"symbol": "079550.KS", "name": "LIG넥스원", "country": "KR"},
+      {"symbol": "LHX", "name": "L3Harris", "country": "US"},
+      {"symbol": "HO.PA", "name": "Thales", "country": "FR"}
+    ]},
+    {"id": "defense-land-naval", "group": "방산", "name": "지상장비/조선", "name_en": "Land & Naval Systems", "shortageItems": ["155mm 포탄"], "stocks": [
+      {"symbol": "RHM.DE", "name": "Rheinmetall", "country": "DE"},
+      {"symbol": "GD", "name": "General Dynamics", "country": "US"},
+      {"symbol": "042660.KS", "name": "한화오션", "country": "KR"}
     ]},
 
     {"id": "oled", "group": "디스플레이", "name": "OLED", "name_en": "OLED", "shortageItems": ["OLED 패널"], "stocks": [
@@ -253,10 +257,12 @@
       {"symbol": "LI", "name": "Li Auto", "country": "CN"},
       {"symbol": "1211.HK", "name": "BYD", "country": "CN"}
     ]},
-    {"id": "auto-oem", "group": "자동차", "name": "완성차", "name_en": "Auto OEM", "shortageItems": [], "stocks": [
+    {"id": "auto-asia", "group": "자동차", "name": "아시아 완성차", "name_en": "Asian Auto OEM", "shortageItems": [], "stocks": [
       {"symbol": "005380.KS", "name": "현대자동차", "country": "KR"},
       {"symbol": "000270.KS", "name": "기아", "country": "KR"},
-      {"symbol": "TM", "name": "Toyota", "country": "JP"},
+      {"symbol": "TM", "name": "Toyota", "country": "JP"}
+    ]},
+    {"id": "auto-west", "group": "자동차", "name": "유럽/미국 완성차", "name_en": "Western Auto OEM", "shortageItems": [], "stocks": [
       {"symbol": "VOW3.DE", "name": "Volkswagen", "country": "DE"},
       {"symbol": "GM", "name": "GM", "country": "US"},
       {"symbol": "F", "name": "Ford", "country": "US"},
@@ -282,16 +288,20 @@
       {"symbol": "GRAB", "name": "Grab", "country": "SG"}
     ]},
 
-    {"id": "banks", "group": "금융", "name": "은행/금융", "name_en": "Banks & Financials", "shortageItems": [], "stocks": [
+    {"id": "kr-financials", "group": "금융", "name": "한국 금융지주", "name_en": "Korean Financial Holdings", "shortageItems": [], "stocks": [
       {"symbol": "105560.KS", "name": "KB금융", "country": "KR"},
       {"symbol": "055550.KS", "name": "신한지주", "country": "KR"},
-      {"symbol": "086790.KS", "name": "하나금융", "country": "KR"},
+      {"symbol": "086790.KS", "name": "하나금융", "country": "KR"}
+    ]},
+    {"id": "global-ib", "group": "금융", "name": "글로벌 IB", "name_en": "Global Investment Banks", "shortageItems": [], "stocks": [
       {"symbol": "JPM", "name": "JP Morgan", "country": "US"},
-      {"symbol": "BAC", "name": "Bank of America", "country": "US"},
       {"symbol": "GS", "name": "Goldman Sachs", "country": "US"},
+      {"symbol": "UBSG.SW", "name": "UBS", "country": "CH"}
+    ]},
+    {"id": "global-banks", "group": "금융", "name": "글로벌 은행", "name_en": "Global Banks", "shortageItems": [], "stocks": [
+      {"symbol": "BAC", "name": "Bank of America", "country": "US"},
       {"symbol": "HSBC", "name": "HSBC", "country": "UK"},
       {"symbol": "MUFG", "name": "MUFG", "country": "JP"},
-      {"symbol": "UBSG.SW", "name": "UBS", "country": "CH"},
       {"symbol": "D05.SI", "name": "DBS Group", "country": "SG"}
     ]}
   ],
