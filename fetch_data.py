@@ -15,6 +15,8 @@ import yfinance as yf
 BASE_DIR = Path(__file__).parent
 CONFIG_PATH = BASE_DIR / "config.json"
 OUTPUT_PATH = BASE_DIR / "data" / "valuation-data.json"
+HISTORY_DIR = BASE_DIR / "data" / "history"
+HISTORY_INDEX = HISTORY_DIR / "index.json"
 
 KST = timezone(timedelta(hours=9))
 
@@ -282,6 +284,108 @@ def main():
     print(f"\nDone! {output['successCount']}/{total_stocks} stocks fetched.")
     print(f"Errors: {len(errors)}")
     print(f"Output: {OUTPUT_PATH}")
+
+    # 히스토리 스냅샷 저장 + 변동률 계산
+    save_snapshot(output)
+    calculate_changes(output)
+
+
+def save_snapshot(output):
+    """당일 compact 스냅샷을 data/history/에 저장."""
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
+    today = datetime.now(KST).strftime("%Y-%m-%d")
+
+    snapshot = {"date": today, "fetchedAt": output["fetchedAt"], "stocks": []}
+
+    for cat in output["categories"]:
+        for stock in cat["stocks"]:
+            if "error" in stock:
+                continue
+            snapshot["stocks"].append({
+                "s": stock["symbol"],
+                "c": cat["id"],
+                "p": stock.get("currentPrice"),
+                "fpe": stock.get("forwardPE"),
+                "tpe": stock.get("trailingPE"),
+                "pb": stock.get("priceToBook"),
+                "ev": stock.get("enterpriseToEbitda"),
+                "tu": stock.get("targetUpside"),
+                "eg": stock.get("fwd1y_growth"),
+                "er": stock.get("epsRevision30d"),
+            })
+
+    snap_path = HISTORY_DIR / f"{today}.json"
+    with open(snap_path, "w", encoding="utf-8") as f:
+        json.dump(snapshot, f, ensure_ascii=False, separators=(",", ":"))
+
+    # index.json 갱신
+    if HISTORY_INDEX.exists():
+        with open(HISTORY_INDEX) as f:
+            index = json.load(f)
+    else:
+        index = {"dates": []}
+
+    if today not in index["dates"]:
+        index["dates"].append(today)
+        index["dates"].sort()
+
+    index["firstDate"] = index["dates"][0]
+    index["lastDate"] = index["dates"][-1]
+    index["count"] = len(index["dates"])
+
+    with open(HISTORY_INDEX, "w", encoding="utf-8") as f:
+        json.dump(index, f, ensure_ascii=False, indent=2)
+
+    print(f"\nSnapshot saved: {snap_path} ({snap_path.stat().st_size / 1024:.1f}KB)")
+
+
+def calculate_changes(output):
+    """히스토리 스냅샷에서 Δ1D/7D/30D Forward P/E 변동률을 계산하여 output에 추가."""
+    today = datetime.now(KST).date()
+
+    def find_snapshot(target_date, max_gap=3):
+        for offset in range(1, max_gap + 1):
+            for delta in [-offset, offset]:
+                check = target_date + timedelta(days=delta)
+                path = HISTORY_DIR / f"{check.isoformat()}.json"
+                if path.exists():
+                    with open(path) as f:
+                        return json.load(f)
+        return None
+
+    periods = {
+        "change1d": find_snapshot(today, max_gap=3),
+        "change7d": find_snapshot(today - timedelta(days=6), max_gap=3),
+        "change30d": find_snapshot(today - timedelta(days=29), max_gap=5),
+    }
+
+    # symbol → fpe 맵 생성
+    history_maps = {}
+    for key, snap in periods.items():
+        if snap:
+            history_maps[key] = {s["s"]: s.get("fpe") for s in snap["stocks"]}
+        else:
+            history_maps[key] = {}
+
+    changes_found = 0
+    for cat in output["categories"]:
+        for stock in cat["stocks"]:
+            if "error" in stock:
+                continue
+            current_pe = stock.get("forwardPE")
+            for key, hmap in history_maps.items():
+                old_pe = hmap.get(stock["symbol"])
+                if current_pe is not None and old_pe is not None and old_pe != 0:
+                    stock[key] = round((current_pe - old_pe) / old_pe * 100, 1)
+                    changes_found += 1
+                else:
+                    stock[key] = None
+
+    # 변동률 포함하여 다시 저장
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+
+    print(f"Changes calculated: {changes_found} values across {len(history_maps)} periods")
 
 
 if __name__ == "__main__":

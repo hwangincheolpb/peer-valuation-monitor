@@ -53,6 +53,10 @@
         .shortage-chip.green { background: #22c55e20; color: #22c55e; border: 1px solid #22c55e40; }
         .shortage-detail { font-size: 12px; padding: 6px 10px; background: #151825; border-radius: 6px; border: 1px solid #2a2d3a; }
         .stat-card { background: #1a1d29; border: 1px solid #2a2d3a; border-radius: 8px; padding: 12px 16px; }
+        .tab-btn { padding: 8px 16px; font-size: 13px; color: #6b7280; border: none; border-bottom: 2px solid transparent; cursor: pointer; background: transparent; transition: all 0.15s; }
+        .tab-btn:hover { color: #9ca3af; }
+        .tab-btn.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+        #stockModal { backdrop-filter: blur(4px); }
         .group-header.active { color: #3b82f6; background: #1a1d2960; }
         .subcat-divider td { background: #151825 !important; padding: 6px 12px !important; font-size: 12px; font-weight: 700; color: #60a5fa; border-left: 3px solid #3b82f6; }
     </style>
@@ -97,8 +101,17 @@
 
             <!-- Chart -->
             <div class="px-6 pb-3">
-                <div id="chartContainer" class="bg-surface rounded-lg border border-border p-4" style="height:340px; position:relative;">
-                    <canvas id="scatterChart"></canvas>
+                <div class="bg-surface rounded-lg border border-border p-4">
+                    <div class="flex gap-1 mb-3 border-b border-border pb-2">
+                        <button id="tabScatter" class="tab-btn active" onclick="switchTab('scatter')">Scatter Plot</button>
+                        <button id="tabTimeSeries" class="tab-btn" onclick="switchTab('timeseries')">Time Series</button>
+                    </div>
+                    <div id="scatterContainer" style="height:300px; position:relative;">
+                        <canvas id="scatterChart"></canvas>
+                    </div>
+                    <div id="timeSeriesContainer" style="height:300px; position:relative; display:none;">
+                        <canvas id="timeSeriesChart"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -120,6 +133,25 @@
         </main>
     </div>
 
+<!-- Stock Detail Modal -->
+<div id="stockModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4" onclick="if(event.target===this)closeModal()">
+    <div class="bg-surface rounded-lg border border-border max-w-3xl w-full max-h-[90vh] overflow-hidden">
+        <div class="px-5 py-3 border-b border-border flex items-center justify-between">
+            <div>
+                <h3 id="modalName" class="text-base font-bold text-white"></h3>
+                <span id="modalSymbol" class="text-xs text-muted"></span>
+            </div>
+            <button onclick="closeModal()" class="text-muted hover:text-white text-xl leading-none">&times;</button>
+        </div>
+        <div class="p-5 overflow-y-auto" style="max-height:calc(90vh - 56px)">
+            <div class="bg-bg rounded-lg border border-border p-3 mb-4" style="height:320px">
+                <canvas id="modalChart"></canvas>
+            </div>
+            <div id="modalStats" class="grid grid-cols-4 gap-3"></div>
+        </div>
+    </div>
+</div>
+
 <script>
 const DATA_URL = 'data/valuation-data.json';
 const FLAGS = {KR:'🇰🇷',US:'🇺🇸',TW:'🇹🇼',JP:'🇯🇵',NL:'🇳🇱',UK:'🇬🇧',DE:'🇩🇪',SG:'🇸🇬',DK:'🇩🇰',CH:'🇨🇭',FR:'🇫🇷',CN:'🇨🇳',CA:'🇨🇦',AU:'🇦🇺',BR:'🇧🇷',CL:'🇨🇱',BE:'🇧🇪',NO:'🇳🇴',IT:'🇮🇹',KZ:'🇰🇿'};
@@ -129,6 +161,9 @@ const COLUMNS = [
     { key: 'currentPrice', label: '현재가', align: 'right', format: 'price' },
     { key: 'marketCapFormatted', label: '시총', align: 'right' },
     { key: 'forwardPE', label: 'Fwd P/E', align: 'right', format: '1f', colorMode: 'pe' },
+    { key: 'change1d', label: 'Δ1D', align: 'center', format: 'change', w: 'w-[56px]' },
+    { key: 'change7d', label: 'Δ7D', align: 'center', format: 'change', w: 'w-[56px]' },
+    { key: 'change30d', label: 'Δ30D', align: 'center', format: 'change', w: 'w-[56px]' },
     { key: 'trailingPE', label: 'Trail P/E', align: 'right', format: '1f' },
     { key: 'priceToBook', label: 'P/B', align: 'right', format: '2f' },
     { key: 'enterpriseToEbitda', label: 'EV/EBITDA', align: 'right', format: '1f', colorMode: 'pe' },
@@ -154,6 +189,7 @@ async function loadData() {
         renderSidebar();
         renderCategory(0);
         renderMeta();
+        preloadHistory();
     } catch (e) {
         document.getElementById('tableBody').innerHTML =
             `<tr><td colspan="13" class="text-center py-12 text-muted">
@@ -228,6 +264,8 @@ function renderCategory(idx) {
 
     // Chart
     renderScatter(cat.stocks || [], (cat.peerAvg || {}).forwardPE);
+    if (tsChart) { tsChart.destroy(); tsChart = null; }
+    if (activeTab === 'timeseries') renderTimeSeries();
 
     // Table
     renderTable(cat);
@@ -318,7 +356,7 @@ function renderTable(cat) {
     const avg = cat.peerAvg || {};
 
     const rows = stocks.map(stock =>
-        '<tr class="border-b border-border/30">' + COLUMNS.map(col => {
+        `<tr class="border-b border-border/30 cursor-pointer hover:bg-surface2/50" onclick="openModal('${stock.symbol}','${stock.name.replace(/'/g, "\\'")}')">` + COLUMNS.map(col => {
             const val = stock[col.key];
             if (col.key === 'name') {
                 const flag = FLAGS[stock.country] || '';
@@ -345,6 +383,11 @@ function renderTable(cat) {
 function fmt(val, format) {
     if (val == null || val === undefined) return '<span class="text-muted">-</span>';
     switch (format) {
+        case 'change': {
+            const color = val < 0 ? 'text-cheap' : val > 0 ? 'text-expensive' : 'text-muted';
+            const arrow = val < 0 ? '↓' : val > 0 ? '↑' : '→';
+            return `<span class="${color} text-xs font-medium">${arrow}${Math.abs(val).toFixed(1)}%</span>`;
+        }
         case '1f': return Number(val).toFixed(1);
         case '2f': return Number(val).toFixed(2);
         case 'd': return Math.round(val).toString();
@@ -427,6 +470,8 @@ function renderGroupView(groupName) {
 
     // Chart
     renderScatter(allStocks, combinedAvg.forwardPE);
+    if (tsChart) { tsChart.destroy(); tsChart = null; }
+    if (activeTab === 'timeseries') renderTimeSeries();
 
     // grouped table
     document.getElementById('tableHead').innerHTML = '<tr>' + COLUMNS.map(col =>
@@ -453,7 +498,7 @@ function renderGroupView(groupName) {
         html += `<tr class="subcat-divider"><td colspan="${COLUMNS.length}">${cat.name} <span class="font-normal text-muted ml-2">${cat.name_en} · ${stocks.length}종목</span></td></tr>`;
 
         for (const stock of stocks) {
-            html += '<tr class="border-b border-border/30">' + COLUMNS.map(col => {
+            html += `<tr class="border-b border-border/30 cursor-pointer hover:bg-surface2/50" onclick="openModal('${stock.symbol}','${stock.name.replace(/'/g, "\\'")}')">` + COLUMNS.map(col => {
                 const val = stock[col.key];
                 if (col.key === 'name') {
                     const flag = FLAGS[stock.country] || '';
@@ -497,6 +542,185 @@ function calcPeerAvgJS(stocks) {
     return avg;
 }
 
+// ========== HISTORY ==========
+const historyCache = { index: null, snaps: new Map() };
+
+async function loadHistoryIndex() {
+    if (historyCache.index) return historyCache.index;
+    try {
+        const r = await fetch('data/history/index.json');
+        if (!r.ok) return null;
+        historyCache.index = await r.json();
+        return historyCache.index;
+    } catch { return null; }
+}
+
+async function loadSnap(date) {
+    if (historyCache.snaps.has(date)) return historyCache.snaps.get(date);
+    try {
+        const r = await fetch(`data/history/${date}.json`);
+        if (!r.ok) return null;
+        const d = await r.json();
+        historyCache.snaps.set(date, d);
+        return d;
+    } catch { return null; }
+}
+
+async function loadHistory(days = 90) {
+    const idx = await loadHistoryIndex();
+    if (!idx || !idx.dates.length) return [];
+    const dates = idx.dates.slice(-days);
+    return (await Promise.all(dates.map(loadSnap))).filter(Boolean);
+}
+
+// preload in background
+async function preloadHistory() {
+    await loadHistory(30);
+}
+
+// ========== TABS ==========
+let activeTab = 'scatter';
+
+function switchTab(tab) {
+    activeTab = tab;
+    document.getElementById('tabScatter').classList.toggle('active', tab === 'scatter');
+    document.getElementById('tabTimeSeries').classList.toggle('active', tab === 'timeseries');
+    document.getElementById('scatterContainer').style.display = tab === 'scatter' ? '' : 'none';
+    document.getElementById('timeSeriesContainer').style.display = tab === 'timeseries' ? '' : 'none';
+    if (tab === 'timeseries') renderTimeSeries();
+}
+
+let tsChart = null;
+
+async function renderTimeSeries() {
+    const history = await loadHistory(90);
+    const container = document.getElementById('timeSeriesContainer');
+
+    if (history.length < 2) {
+        container.innerHTML = '<div class="flex items-center justify-center h-full text-muted text-sm">히스토리 2일 이상 필요 (매일 데이터 수집 후 누적됩니다)</div>';
+        return;
+    }
+    // restore canvas if replaced
+    if (!document.getElementById('timeSeriesChart')) {
+        container.innerHTML = '<canvas id="timeSeriesChart"></canvas>';
+    }
+
+    const catIds = currentGroup
+        ? allData.categories.filter(c => c.group === currentGroup).map(c => c.id)
+        : [allData.categories[currentCat].id];
+
+    const dates = history.map(s => s.date);
+    const avgSeries = [], minSeries = [], maxSeries = [];
+
+    for (const snap of history) {
+        const stocks = snap.stocks.filter(s => catIds.includes(s.c) && s.fpe != null);
+        if (!stocks.length) { avgSeries.push(null); minSeries.push(null); maxSeries.push(null); continue; }
+        const pes = stocks.map(s => s.fpe);
+        avgSeries.push(+(pes.reduce((a,b) => a+b) / pes.length).toFixed(2));
+        minSeries.push(Math.min(...pes));
+        maxSeries.push(Math.max(...pes));
+    }
+
+    if (tsChart) tsChart.destroy();
+    tsChart = new Chart(document.getElementById('timeSeriesChart'), {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [
+                { label: 'Peer Avg P/E', data: avgSeries, borderColor: '#3b82f6', borderWidth: 2.5, tension: 0.15, spanGaps: true, pointRadius: 2 },
+                { label: 'Min', data: minSeries, borderColor: '#6b728040', borderWidth: 1, borderDash: [4,4], tension: 0.15, spanGaps: true, pointRadius: 0, fill: false },
+                { label: 'Max', data: maxSeries, borderColor: '#6b728040', borderWidth: 1, borderDash: [4,4], tension: 0.15, spanGaps: true, pointRadius: 0, fill: '-1', backgroundColor: '#3b82f610' },
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: true, position: 'top', labels: { color: '#e5e7eb', font: { size: 11 }, boxWidth: 12 } },
+                tooltip: { backgroundColor: '#1a1d29', titleColor: '#e5e7eb', bodyColor: '#e5e7eb', borderColor: '#2a2d3a', borderWidth: 1 },
+            },
+            scales: {
+                x: { grid: { color: '#2a2d3a40' }, ticks: { color: '#6b7280', maxRotation: 45, font: { size: 10 } } },
+                y: { title: { display: true, text: 'Forward P/E', color: '#6b7280' }, grid: { color: '#2a2d3a40' }, ticks: { color: '#6b7280' } },
+            },
+        },
+    });
+}
+
+// ========== STOCK MODAL ==========
+let modalChart = null;
+
+async function openModal(symbol, name) {
+    document.getElementById('stockModal').classList.remove('hidden');
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalSymbol').textContent = symbol;
+
+    const history = await loadHistory(180);
+    const cat = allData.categories.find(c => c.stocks.some(s => s.symbol === symbol));
+    const catId = cat?.id;
+
+    const dates = [], fpeArr = [], tpeArr = [], peerArr = [];
+    for (const snap of history) {
+        const stock = snap.stocks.find(s => s.s === symbol);
+        if (!stock) continue;
+        dates.push(snap.date);
+        fpeArr.push(stock.fpe);
+        tpeArr.push(stock.tpe);
+        const peers = snap.stocks.filter(s => s.c === catId && s.fpe != null);
+        peerArr.push(peers.length ? +(peers.reduce((a,b) => a + b.fpe, 0) / peers.length).toFixed(2) : null);
+    }
+
+    if (!document.getElementById('modalChart')) {
+        document.querySelector('#stockModal .bg-bg').innerHTML = '<canvas id="modalChart"></canvas>';
+    }
+    if (modalChart) modalChart.destroy();
+
+    if (dates.length < 2) {
+        document.querySelector('#stockModal .bg-bg').innerHTML = '<div class="flex items-center justify-center h-full text-muted text-sm">히스토리 2일 이상 필요</div>';
+    } else {
+        modalChart = new Chart(document.getElementById('modalChart'), {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [
+                    { label: 'Forward P/E', data: fpeArr, borderColor: '#3b82f6', borderWidth: 2.5, tension: 0.2, spanGaps: true, pointRadius: 2 },
+                    { label: 'Trailing P/E', data: tpeArr, borderColor: '#f59e0b', borderWidth: 2, tension: 0.2, spanGaps: true, pointRadius: 1 },
+                    { label: 'Peer Avg', data: peerArr, borderColor: '#6b7280', borderWidth: 1.5, borderDash: [5,5], tension: 0.2, spanGaps: true, pointRadius: 0 },
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: true, position: 'top', labels: { color: '#e5e7eb', font: { size: 11 }, boxWidth: 12 } }, tooltip: { backgroundColor: '#1a1d29', titleColor: '#e5e7eb', bodyColor: '#e5e7eb' } },
+                scales: {
+                    x: { grid: { color: '#2a2d3a40' }, ticks: { color: '#6b7280', font: { size: 10 } } },
+                    y: { title: { display: true, text: 'P/E', color: '#6b7280' }, grid: { color: '#2a2d3a40' }, ticks: { color: '#6b7280' } },
+                },
+            },
+        });
+    }
+
+    // Stats
+    const valid = fpeArr.filter(v => v != null);
+    const last30 = valid.slice(-30), last90 = valid.slice(-90);
+    const stats = [
+        { label: 'Current P/E', value: valid.length ? valid[valid.length-1].toFixed(2) : '-', sub: peerArr.length && peerArr[peerArr.length-1] ? `vs peer ${peerArr[peerArr.length-1].toFixed(2)}` : '' },
+        { label: '30D Range', value: last30.length ? `${Math.min(...last30).toFixed(1)} - ${Math.max(...last30).toFixed(1)}` : '-', sub: last30.length ? `Avg ${(last30.reduce((a,b)=>a+b)/last30.length).toFixed(2)}` : '' },
+        { label: '90D Range', value: last90.length >= 2 ? `${Math.min(...last90).toFixed(1)} - ${Math.max(...last90).toFixed(1)}` : '-', sub: last90.length >= 2 ? `Avg ${(last90.reduce((a,b)=>a+b)/last90.length).toFixed(2)}` : '' },
+        { label: 'All Data', value: valid.length >= 2 ? `${Math.min(...valid).toFixed(1)} - ${Math.max(...valid).toFixed(1)}` : '-', sub: `${valid.length} data points` },
+    ];
+    document.getElementById('modalStats').innerHTML = stats.map(s =>
+        `<div class="stat-card"><div class="text-xs text-muted">${s.label}</div><div class="text-lg font-bold text-white mt-1">${s.value}</div><div class="text-xs text-muted mt-0.5">${s.sub}</div></div>`
+    ).join('');
+}
+
+function closeModal() {
+    document.getElementById('stockModal').classList.add('hidden');
+    if (modalChart) { modalChart.destroy(); modalChart = null; }
+}
+
+// Close modal on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
 let scatterChart = null;
 
 function renderScatter(stocks, avgPE) {
@@ -515,10 +739,10 @@ function renderScatter(stocks, avgPE) {
         }));
 
     if (points.length < 2) {
-        document.getElementById('chartContainer').style.display = 'none';
+        document.getElementById('scatterContainer').style.display = 'none';
         return;
     }
-    document.getElementById('chartContainer').style.display = '';
+    document.getElementById('scatterContainer').style.display = '';
 
     scatterChart = new Chart(canvas, {
         type: 'scatter',

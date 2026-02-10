@@ -38,7 +38,10 @@
           "targetUpside": 24.67,
           "name": "SK하이닉스",
           "country": "KR",
-          "marketCapFormatted": "$609.0T"
+          "marketCapFormatted": "$609.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "005930.KS",
@@ -71,7 +74,10 @@
           "targetUpside": 16.1,
           "name": "삼성전자",
           "country": "KR",
-          "marketCapFormatted": "$1115.2T"
+          "marketCapFormatted": "$1115.2T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MU",
@@ -104,7 +110,10 @@
           "targetUpside": -5.11,
           "name": "Micron",
           "country": "US",
-          "marketCapFormatted": "$444.2B"
+          "marketCapFormatted": "$444.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -177,7 +186,10 @@
           "targetUpside": 16.1,
           "name": "삼성전자",
           "country": "KR",
-          "marketCapFormatted": "$1115.2T"
+          "marketCapFormatted": "$1115.2T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "000660.KS",
@@ -210,7 +222,10 @@
           "targetUpside": 24.67,
           "name": "SK하이닉스",
           "country": "KR",
-          "marketCapFormatted": "$609.0T"
+          "marketCapFormatted": "$609.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MU",
@@ -243,7 +258,10 @@
           "targetUpside": -5.11,
           "name": "Micron",
           "country": "US",
-          "marketCapFormatted": "$444.2B"
+          "marketCapFormatted": "$444.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "2408.TW",
@@ -276,7 +294,10 @@
           "targetUpside": 6.25,
           "name": "Nanya Technology",
           "country": "TW",
-          "marketCapFormatted": "$850.6B"
+          "marketCapFormatted": "$850.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "3231.TW",
@@ -309,7 +330,10 @@
           "targetUpside": 46.74,
           "name": "Winbond",
           "country": "TW",
-          "marketCapFormatted": "$416.6B"
+          "marketCapFormatted": "$416.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -390,7 +414,10 @@
           "targetUpside": 16.1,
           "name": "삼성전자",
           "country": "KR",
-          "marketCapFormatted": "$1115.2T"
+          "marketCapFormatted": "$1115.2T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "000660.KS",
@@ -423,7 +450,10 @@
           "targetUpside": 24.67,
           "name": "SK하이닉스",
           "country": "KR",
-          "marketCapFormatted": "$609.0T"
+          "marketCapFormatted": "$609.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MU",
@@ -456,7 +486,10 @@
           "targetUpside": -5.11,
           "name": "Micron",
           "country": "US",
-          "marketCapFormatted": "$444.2B"
+          "marketCapFormatted": "$444.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "WDC",
@@ -489,7 +522,10 @@
           "targetUpside": 7.6,
           "name": "Western Digital",
           "country": "US",
-          "marketCapFormatted": "$96.6B"
+          "marketCapFormatted": "$96.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -562,7 +598,10 @@
           "targetUpside": 16.1,
           "name": "삼성전자",
           "country": "KR",
-          "marketCapFormatted": "$1115.2T"
+          "marketCapFormatted": "$1115.2T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "WDC",
@@ -595,7 +634,10 @@
           "targetUpside": 7.6,
           "name": "Western Digital",
           "country": "US",
-          "marketCapFormatted": "$96.6B"
+          "marketCapFormatted": "$96.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MU",
@@ -628,7 +670,10 @@
           "targetUpside": -5.11,
           "name": "Micron",
           "country": "US",
-          "marketCapFormatted": "$444.2B"
+          "marketCapFormatted": "$444.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "STX",
@@ -661,7 +706,10 @@
           "targetUpside": 5.72,
           "name": "Seagate",
           "country": "US",
-          "marketCapFormatted": "$93.6B"
+          "marketCapFormatted": "$93.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "8299.TWO",
@@ -694,7 +742,10 @@
           "targetUpside": -24.06,
           "name": "Phison",
           "country": "TW",
-          "marketCapFormatted": "$400.6B"
+          "marketCapFormatted": "$400.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "SIMO",
@@ -727,7 +778,10 @@
           "targetUpside": 13.73,
           "name": "Silicon Motion",
           "country": "TW",
-          "marketCapFormatted": "$4.4B"
+          "marketCapFormatted": "$4.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -789,7 +843,10 @@
           "targetUpside": 7.6,
           "name": "Western Digital",
           "country": "US",
-          "marketCapFormatted": "$96.6B"
+          "marketCapFormatted": "$96.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "STX",
@@ -822,7 +879,10 @@
           "targetUpside": 5.72,
           "name": "Seagate",
           "country": "US",
-          "marketCapFormatted": "$93.6B"
+          "marketCapFormatted": "$93.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -884,7 +944,10 @@
           "targetUpside": 36.79,
           "name": "NVIDIA",
           "country": "US",
-          "marketCapFormatted": "$4.5T"
+          "marketCapFormatted": "$4.5T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "AMD",
@@ -917,7 +980,10 @@
           "targetUpside": 38.41,
           "name": "AMD",
           "country": "US",
-          "marketCapFormatted": "$339.8B"
+          "marketCapFormatted": "$339.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "INTC",
@@ -950,7 +1016,10 @@
           "targetUpside": -6.76,
           "name": "Intel",
           "country": "US",
-          "marketCapFormatted": "$252.7B"
+          "marketCapFormatted": "$252.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -1012,7 +1081,10 @@
           "targetUpside": 37.92,
           "name": "Broadcom",
           "country": "US",
-          "marketCapFormatted": "$1.6T"
+          "marketCapFormatted": "$1.6T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MRVL",
@@ -1045,7 +1117,10 @@
           "targetUpside": 44.83,
           "name": "Marvell",
           "country": "US",
-          "marketCapFormatted": "$69.2B"
+          "marketCapFormatted": "$69.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ANET",
@@ -1078,7 +1153,10 @@
           "targetUpside": 20.0,
           "name": "Arista Networks",
           "country": "US",
-          "marketCapFormatted": "$173.1B"
+          "marketCapFormatted": "$173.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -1140,7 +1218,10 @@
           "targetUpside": 18.91,
           "name": "Qualcomm",
           "country": "US",
-          "marketCapFormatted": "$146.7B"
+          "marketCapFormatted": "$146.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "2454.TW",
@@ -1173,7 +1254,10 @@
           "targetUpside": 13.49,
           "name": "MediaTek",
           "country": "TW",
-          "marketCapFormatted": "$2.9T"
+          "marketCapFormatted": "$2.9T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -1235,7 +1319,10 @@
           "targetUpside": 20.34,
           "name": "TSMC",
           "country": "TW",
-          "marketCapFormatted": "$1.8T"
+          "marketCapFormatted": "$1.8T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "INTC",
@@ -1268,7 +1355,10 @@
           "targetUpside": -6.76,
           "name": "Intel",
           "country": "US",
-          "marketCapFormatted": "$252.7B"
+          "marketCapFormatted": "$252.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "GFS",
@@ -1301,7 +1391,10 @@
           "targetUpside": -5.23,
           "name": "GlobalFoundries",
           "country": "US",
-          "marketCapFormatted": "$23.8B"
+          "marketCapFormatted": "$23.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "2303.TW",
@@ -1334,7 +1427,10 @@
           "targetUpside": -3.04,
           "name": "UMC",
           "country": "TW",
-          "marketCapFormatted": "$785.5B"
+          "marketCapFormatted": "$785.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "0981.HK",
@@ -1367,7 +1463,10 @@
           "targetUpside": 6.99,
           "name": "SMIC",
           "country": "CN",
-          "marketCapFormatted": "$677.0B"
+          "marketCapFormatted": "$677.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -1429,7 +1528,10 @@
           "targetUpside": 20.34,
           "name": "TSMC",
           "country": "TW",
-          "marketCapFormatted": "$1.8T"
+          "marketCapFormatted": "$1.8T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ASX",
@@ -1462,7 +1564,10 @@
           "targetUpside": 11.61,
           "name": "ASE Technology",
           "country": "TW",
-          "marketCapFormatted": "$45.7B"
+          "marketCapFormatted": "$45.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "AMKR",
@@ -1495,7 +1600,10 @@
           "targetUpside": -9.34,
           "name": "Amkor",
           "country": "US",
-          "marketCapFormatted": "$12.2B"
+          "marketCapFormatted": "$12.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "600584.SS",
@@ -1516,7 +1624,10 @@
           "recommendationMean": null,
           "name": "JCET Group",
           "country": "CN",
-          "marketCapFormatted": "$83.5B"
+          "marketCapFormatted": "$83.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -1605,7 +1716,10 @@
           "targetUpside": 5.51,
           "name": "ASML",
           "country": "NL",
-          "marketCapFormatted": "$548.5B"
+          "marketCapFormatted": "$548.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -1678,7 +1792,10 @@
           "targetUpside": 2.2,
           "name": "Applied Materials",
           "country": "US",
-          "marketCapFormatted": "$256.0B"
+          "marketCapFormatted": "$256.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "LRCX",
@@ -1711,7 +1828,10 @@
           "targetUpside": 17.09,
           "name": "Lam Research",
           "country": "US",
-          "marketCapFormatted": "$290.2B"
+          "marketCapFormatted": "$290.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "8035.T",
@@ -1744,7 +1864,10 @@
           "targetUpside": 1.72,
           "name": "Tokyo Electron",
           "country": "JP",
-          "marketCapFormatted": "$19.0T"
+          "marketCapFormatted": "$19.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ASM.AS",
@@ -1777,7 +1900,10 @@
           "targetUpside": 10.93,
           "name": "ASM International",
           "country": "NL",
-          "marketCapFormatted": "$33.4B"
+          "marketCapFormatted": "$33.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "7735.T",
@@ -1810,7 +1936,10 @@
           "targetUpside": -11.55,
           "name": "SCREEN Holdings",
           "country": "JP",
-          "marketCapFormatted": "$2.0T"
+          "marketCapFormatted": "$2.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -1872,7 +2001,10 @@
           "targetUpside": 13.48,
           "name": "KLA",
           "country": "US",
-          "marketCapFormatted": "$189.6B"
+          "marketCapFormatted": "$189.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ONTO",
@@ -1905,7 +2037,10 @@
           "targetUpside": 3.12,
           "name": "Onto Innovation",
           "country": "US",
-          "marketCapFormatted": "$10.4B"
+          "marketCapFormatted": "$10.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "6920.T",
@@ -1938,7 +2073,10 @@
           "targetUpside": -3.62,
           "name": "Lasertec",
           "country": "JP",
-          "marketCapFormatted": "$2.9T"
+          "marketCapFormatted": "$2.9T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -2000,7 +2138,10 @@
           "targetUpside": 5.39,
           "name": "Shin-Etsu Chemical",
           "country": "JP",
-          "marketCapFormatted": "$9.9T"
+          "marketCapFormatted": "$9.9T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "3436.T",
@@ -2033,7 +2174,10 @@
           "targetUpside": -8.92,
           "name": "SUMCO",
           "country": "JP",
-          "marketCapFormatted": "$590.8B"
+          "marketCapFormatted": "$590.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ENTG",
@@ -2066,7 +2210,10 @@
           "targetUpside": -4.61,
           "name": "Entegris",
           "country": "US",
-          "marketCapFormatted": "$18.6B"
+          "marketCapFormatted": "$18.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -2147,7 +2294,10 @@
           "targetUpside": 2.91,
           "name": "HD현대일렉트릭",
           "country": "KR",
-          "marketCapFormatted": "$33.8T"
+          "marketCapFormatted": "$33.8T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "010120.KS",
@@ -2180,7 +2330,10 @@
           "targetUpside": -6.95,
           "name": "LS ELECTRIC",
           "country": "KR",
-          "marketCapFormatted": "$19.3T"
+          "marketCapFormatted": "$19.3T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ETN",
@@ -2213,7 +2366,10 @@
           "targetUpside": 8.02,
           "name": "Eaton",
           "country": "US",
-          "marketCapFormatted": "$145.5B"
+          "marketCapFormatted": "$145.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "GEV",
@@ -2246,7 +2402,10 @@
           "targetUpside": 5.21,
           "name": "GE Vernova",
           "country": "US",
-          "marketCapFormatted": "$211.5B"
+          "marketCapFormatted": "$211.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ENR.DE",
@@ -2279,7 +2438,10 @@
           "targetUpside": -6.08,
           "name": "Siemens Energy",
           "country": "DE",
-          "marketCapFormatted": "$130.0B"
+          "marketCapFormatted": "$130.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "SU.PA",
@@ -2312,7 +2474,10 @@
           "targetUpside": 9.01,
           "name": "Schneider Electric",
           "country": "FR",
-          "marketCapFormatted": "$142.2B"
+          "marketCapFormatted": "$142.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ABBN.SW",
@@ -2345,7 +2510,10 @@
           "targetUpside": -7.01,
           "name": "ABB",
           "country": "CH",
-          "marketCapFormatted": "$121.6B"
+          "marketCapFormatted": "$121.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -2418,7 +2586,10 @@
           "targetUpside": 18.59,
           "name": "POSCO홀딩스",
           "country": "KR",
-          "marketCapFormatted": "$27.4T"
+          "marketCapFormatted": "$27.4T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "5401.T",
@@ -2451,7 +2622,10 @@
           "targetUpside": 0.85,
           "name": "Nippon Steel",
           "country": "JP",
-          "marketCapFormatted": "$3.5T"
+          "marketCapFormatted": "$3.5T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MT",
@@ -2484,7 +2658,10 @@
           "targetUpside": -9.76,
           "name": "ArcelorMittal",
           "country": "NL",
-          "marketCapFormatted": "$47.0B"
+          "marketCapFormatted": "$47.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -2557,7 +2734,10 @@
           "targetUpside": 8.15,
           "name": "Cameco",
           "country": "CA",
-          "marketCapFormatted": "$49.6B"
+          "marketCapFormatted": "$49.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "NXE",
@@ -2578,7 +2758,10 @@
           "recommendationMean": null,
           "name": "NexGen Energy",
           "country": "CA",
-          "marketCapFormatted": "$7.2B"
+          "marketCapFormatted": "$7.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "UEC",
@@ -2611,7 +2794,10 @@
           "targetUpside": 14.42,
           "name": "Uranium Energy",
           "country": "US",
-          "marketCapFormatted": "$7.8B"
+          "marketCapFormatted": "$7.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "DNN",
@@ -2644,7 +2830,10 @@
           "targetUpside": 16.41,
           "name": "Denison Mines",
           "country": "CA",
-          "marketCapFormatted": "$3.3B"
+          "marketCapFormatted": "$3.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "KAP.L",
@@ -2677,7 +2866,10 @@
           "targetUpside": 182.55,
           "name": "Kazatomprom",
           "country": "KZ",
-          "marketCapFormatted": "$7.6B"
+          "marketCapFormatted": "$7.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "PDN.AX",
@@ -2710,7 +2902,10 @@
           "targetUpside": -3.53,
           "name": "Paladin Energy",
           "country": "AU",
-          "marketCapFormatted": "$5.2B"
+          "marketCapFormatted": "$5.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "UUUU",
@@ -2743,7 +2938,10 @@
           "targetUpside": 21.64,
           "name": "Energy Fuels",
           "country": "US",
-          "marketCapFormatted": "$5.1B"
+          "marketCapFormatted": "$5.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -2832,7 +3030,10 @@
           "targetUpside": 6.74,
           "name": "두산에너빌리티",
           "country": "KR",
-          "marketCapFormatted": "$61.1T"
+          "marketCapFormatted": "$61.1T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "SMR",
@@ -2865,7 +3066,10 @@
           "targetUpside": 93.73,
           "name": "NuScale Power",
           "country": "US",
-          "marketCapFormatted": "$5.0B"
+          "marketCapFormatted": "$5.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "BWXT",
@@ -2898,7 +3102,10 @@
           "targetUpside": 13.82,
           "name": "BWX Technologies",
           "country": "US",
-          "marketCapFormatted": "$18.0B"
+          "marketCapFormatted": "$18.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "OKLO",
@@ -2931,7 +3138,10 @@
           "targetUpside": 63.0,
           "name": "Oklo",
           "country": "US",
-          "marketCapFormatted": "$11.1B"
+          "marketCapFormatted": "$11.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "LEU",
@@ -2964,7 +3174,10 @@
           "targetUpside": 11.55,
           "name": "Centrus Energy",
           "country": "US",
-          "marketCapFormatted": "$4.8B"
+          "marketCapFormatted": "$4.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "RR.L",
@@ -2997,7 +3210,10 @@
           "targetUpside": 5.31,
           "name": "Rolls-Royce",
           "country": "UK",
-          "marketCapFormatted": "$101.8B"
+          "marketCapFormatted": "$101.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -3059,7 +3275,10 @@
           "targetUpside": 22.68,
           "name": "LG에너지솔루션",
           "country": "KR",
-          "marketCapFormatted": "$91.3T"
+          "marketCapFormatted": "$91.3T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "006400.KS",
@@ -3092,7 +3311,10 @@
           "targetUpside": -7.58,
           "name": "삼성SDI",
           "country": "KR",
-          "marketCapFormatted": "$29.7T"
+          "marketCapFormatted": "$29.7T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "6752.T",
@@ -3125,7 +3347,10 @@
           "targetUpside": -2.14,
           "name": "Panasonic",
           "country": "JP",
-          "marketCapFormatted": "$5.8T"
+          "marketCapFormatted": "$5.8T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "1211.HK",
@@ -3158,7 +3383,10 @@
           "targetUpside": 36.79,
           "name": "BYD",
           "country": "CN",
-          "marketCapFormatted": "$856.1B"
+          "marketCapFormatted": "$856.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "300750.SZ",
@@ -3191,7 +3419,10 @@
           "targetUpside": 30.63,
           "name": "CATL",
           "country": "CN",
-          "marketCapFormatted": "$1.7T"
+          "marketCapFormatted": "$1.7T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "300014.SZ",
@@ -3224,7 +3455,10 @@
           "targetUpside": 36.18,
           "name": "EVE Energy",
           "country": "CN",
-          "marketCapFormatted": "$132.8B"
+          "marketCapFormatted": "$132.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -3305,7 +3539,10 @@
           "targetUpside": 8.1,
           "name": "Albemarle",
           "country": "US",
-          "marketCapFormatted": "$19.2B"
+          "marketCapFormatted": "$19.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "SQM",
@@ -3338,7 +3575,10 @@
           "targetUpside": 3.61,
           "name": "SQM",
           "country": "CL",
-          "marketCapFormatted": "$20.4B"
+          "marketCapFormatted": "$20.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "PLS.AX",
@@ -3371,7 +3611,10 @@
           "targetUpside": 7.7,
           "name": "Pilbara Minerals",
           "country": "AU",
-          "marketCapFormatted": "$13.4B"
+          "marketCapFormatted": "$13.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "1772.HK",
@@ -3404,7 +3647,10 @@
           "targetUpside": -2.35,
           "name": "Ganfeng Lithium",
           "country": "CN",
-          "marketCapFormatted": "$156.1B"
+          "marketCapFormatted": "$156.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -3475,7 +3721,10 @@
           "targetUpside": -25.89,
           "name": "에코프로비엠",
           "country": "KR",
-          "marketCapFormatted": "$19.7T"
+          "marketCapFormatted": "$19.7T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "003670.KS",
@@ -3508,7 +3757,10 @@
           "targetUpside": -15.72,
           "name": "포스코퓨처엠",
           "country": "KR",
-          "marketCapFormatted": "$19.8T"
+          "marketCapFormatted": "$19.8T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "066970.KS",
@@ -3541,7 +3793,10 @@
           "targetUpside": 15.25,
           "name": "L&F",
           "country": "KR",
-          "marketCapFormatted": "$4.5T"
+          "marketCapFormatted": "$4.5T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -3642,7 +3897,10 @@
           "targetUpside": -20.81,
           "name": "한화솔루션",
           "country": "KR",
-          "marketCapFormatted": "$8.2T"
+          "marketCapFormatted": "$8.2T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "FSLR",
@@ -3675,7 +3933,10 @@
           "targetUpside": 28.23,
           "name": "First Solar",
           "country": "US",
-          "marketCapFormatted": "$23.5B"
+          "marketCapFormatted": "$23.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "CSIQ",
@@ -3708,7 +3969,10 @@
           "targetUpside": 8.62,
           "name": "Canadian Solar",
           "country": "CA",
-          "marketCapFormatted": "$1.3B"
+          "marketCapFormatted": "$1.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "JKS",
@@ -3741,7 +4005,10 @@
           "targetUpside": 23.06,
           "name": "JinkoSolar",
           "country": "CN",
-          "marketCapFormatted": "$1.4B"
+          "marketCapFormatted": "$1.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "601012.SS",
@@ -3762,7 +4029,10 @@
           "recommendationMean": null,
           "name": "LONGi Green Energy",
           "country": "CN",
-          "marketCapFormatted": "$145.4B"
+          "marketCapFormatted": "$145.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "688599.SS",
@@ -3783,7 +4053,10 @@
           "recommendationMean": null,
           "name": "Trina Solar",
           "country": "CN",
-          "marketCapFormatted": "$49.4B"
+          "marketCapFormatted": "$49.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -3872,7 +4145,10 @@
           "targetUpside": -9.08,
           "name": "Enphase",
           "country": "US",
-          "marketCapFormatted": "$6.5B"
+          "marketCapFormatted": "$6.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "SEDG",
@@ -3905,7 +4181,10 @@
           "targetUpside": -10.67,
           "name": "SolarEdge",
           "country": "US",
-          "marketCapFormatted": "$2.1B"
+          "marketCapFormatted": "$2.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "S92.DE",
@@ -3938,7 +4217,10 @@
           "targetUpside": -10.13,
           "name": "SMA Solar",
           "country": "DE",
-          "marketCapFormatted": "$1.2B"
+          "marketCapFormatted": "$1.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -3998,7 +4280,10 @@
           "targetUpside": 6.6,
           "name": "Vestas",
           "country": "DK",
-          "marketCapFormatted": "$163.1B"
+          "marketCapFormatted": "$163.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "NDX1.DE",
@@ -4031,7 +4316,10 @@
           "targetUpside": -6.11,
           "name": "Nordex",
           "country": "DE",
-          "marketCapFormatted": "$7.7B"
+          "marketCapFormatted": "$7.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "2208.HK",
@@ -4064,7 +4352,10 @@
           "targetUpside": 18.43,
           "name": "Goldwind",
           "country": "CN",
-          "marketCapFormatted": "$116.2B"
+          "marketCapFormatted": "$116.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -4153,7 +4444,10 @@
           "targetUpside": -0.56,
           "name": "Ørsted",
           "country": "DK",
-          "marketCapFormatted": "$190.5B"
+          "marketCapFormatted": "$190.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -4232,7 +4526,10 @@
           "targetUpside": 29.08,
           "name": "MP Materials",
           "country": "US",
-          "marketCapFormatted": "$10.9B"
+          "marketCapFormatted": "$10.9B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "LYC.AX",
@@ -4265,7 +4562,10 @@
           "targetUpside": 7.09,
           "name": "Lynas Rare Earths",
           "country": "AU",
-          "marketCapFormatted": "$14.9B"
+          "marketCapFormatted": "$14.9B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -4352,7 +4652,10 @@
           "targetUpside": 28.32,
           "name": "Iluka Resources",
           "country": "AU",
-          "marketCapFormatted": "$2.2B"
+          "marketCapFormatted": "$2.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "VNP.TO",
@@ -4385,7 +4688,10 @@
           "targetUpside": 11.76,
           "name": "5N Plus",
           "country": "CA",
-          "marketCapFormatted": "$2.5B"
+          "marketCapFormatted": "$2.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "UMI.BR",
@@ -4418,7 +4724,10 @@
           "targetUpside": -8.37,
           "name": "Umicore",
           "country": "BE",
-          "marketCapFormatted": "$4.7B"
+          "marketCapFormatted": "$4.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -4531,7 +4840,10 @@
           "targetUpside": 1.32,
           "name": "Freeport-McMoRan",
           "country": "US",
-          "marketCapFormatted": "$87.1B"
+          "marketCapFormatted": "$87.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "SCCO",
@@ -4564,7 +4876,10 @@
           "targetUpside": -25.26,
           "name": "Southern Copper",
           "country": "US",
-          "marketCapFormatted": "$163.9B"
+          "marketCapFormatted": "$163.9B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ANTO.L",
@@ -4597,7 +4912,10 @@
           "targetUpside": -3.75,
           "name": "Antofagasta",
           "country": "UK",
-          "marketCapFormatted": "$35.3B"
+          "marketCapFormatted": "$35.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "FM.TO",
@@ -4630,7 +4948,10 @@
           "targetUpside": 11.9,
           "name": "First Quantum Minerals",
           "country": "CA",
-          "marketCapFormatted": "$31.2B"
+          "marketCapFormatted": "$31.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -4703,7 +5024,10 @@
           "targetUpside": 3.25,
           "name": "Alcoa",
           "country": "US",
-          "marketCapFormatted": "$15.3B"
+          "marketCapFormatted": "$15.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "NHY.OL",
@@ -4736,7 +5060,10 @@
           "targetUpside": -8.95,
           "name": "Norsk Hydro",
           "country": "NO",
-          "marketCapFormatted": "$173.4B"
+          "marketCapFormatted": "$173.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -4817,7 +5144,10 @@
           "targetUpside": -14.66,
           "name": "BHP",
           "country": "AU",
-          "marketCapFormatted": "$178.9B"
+          "marketCapFormatted": "$178.9B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "RIO",
@@ -4850,7 +5180,10 @@
           "targetUpside": -5.36,
           "name": "Rio Tinto",
           "country": "AU",
-          "marketCapFormatted": "$186.5B"
+          "marketCapFormatted": "$186.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "VALE",
@@ -4883,7 +5216,10 @@
           "targetUpside": -3.8,
           "name": "Vale",
           "country": "BR",
-          "marketCapFormatted": "$69.6B"
+          "marketCapFormatted": "$69.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "GLEN.L",
@@ -4916,7 +5252,10 @@
           "targetUpside": 9.12,
           "name": "Glencore",
           "country": "UK",
-          "marketCapFormatted": "$56.0B"
+          "marketCapFormatted": "$56.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "TECK",
@@ -4949,7 +5288,10 @@
           "targetUpside": -13.82,
           "name": "Teck Resources",
           "country": "CA",
-          "marketCapFormatted": "$26.9B"
+          "marketCapFormatted": "$26.9B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -5070,7 +5412,10 @@
           "targetUpside": -5.68,
           "name": "ExxonMobil",
           "country": "US",
-          "marketCapFormatted": "$628.6B"
+          "marketCapFormatted": "$628.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "SHEL",
@@ -5103,7 +5448,10 @@
           "targetUpside": 9.56,
           "name": "Shell",
           "country": "UK",
-          "marketCapFormatted": "$215.5B"
+          "marketCapFormatted": "$215.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "TTE",
@@ -5135,7 +5483,10 @@
           "targetUpside": -2.56,
           "name": "TotalEnergies",
           "country": "FR",
-          "marketCapFormatted": "$158.2B"
+          "marketCapFormatted": "$158.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "CVX",
@@ -5168,7 +5519,10 @@
           "targetUpside": 0.45,
           "name": "Chevron",
           "country": "US",
-          "marketCapFormatted": "$361.6B"
+          "marketCapFormatted": "$361.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "BP",
@@ -5201,7 +5555,10 @@
           "targetUpside": -0.44,
           "name": "BP",
           "country": "UK",
-          "marketCapFormatted": "$100.5B"
+          "marketCapFormatted": "$100.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "COP",
@@ -5234,7 +5591,10 @@
           "targetUpside": 6.27,
           "name": "ConocoPhillips",
           "country": "US",
-          "marketCapFormatted": "$133.0B"
+          "marketCapFormatted": "$133.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -5331,7 +5691,10 @@
           "targetUpside": 24.56,
           "name": "Cheniere Energy",
           "country": "US",
-          "marketCapFormatted": "$46.8B"
+          "marketCapFormatted": "$46.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "WDS",
@@ -5352,7 +5715,10 @@
           "recommendationMean": null,
           "name": "Woodside Energy",
           "country": "AU",
-          "marketCapFormatted": "$35.6B"
+          "marketCapFormatted": "$35.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -5425,7 +5791,10 @@
           "targetUpside": 4.38,
           "name": "한국전력",
           "country": "KR",
-          "marketCapFormatted": "$40.1T"
+          "marketCapFormatted": "$40.1T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "NEE",
@@ -5458,7 +5827,10 @@
           "targetUpside": 3.55,
           "name": "NextEra Energy",
           "country": "US",
-          "marketCapFormatted": "$186.3B"
+          "marketCapFormatted": "$186.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "DUK",
@@ -5491,7 +5863,10 @@
           "targetUpside": 10.11,
           "name": "Duke Energy",
           "country": "US",
-          "marketCapFormatted": "$94.8B"
+          "marketCapFormatted": "$94.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ENEL.MI",
@@ -5524,7 +5899,10 @@
           "targetUpside": -0.57,
           "name": "Enel",
           "country": "IT",
-          "marketCapFormatted": "$95.1B"
+          "marketCapFormatted": "$95.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -5597,7 +5975,10 @@
           "targetUpside": 12.58,
           "name": "한화에어로스페이스",
           "country": "KR",
-          "marketCapFormatted": "$64.0T"
+          "marketCapFormatted": "$64.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "079550.KS",
@@ -5630,7 +6011,10 @@
           "targetUpside": 37.61,
           "name": "LIG넥스원",
           "country": "KR",
-          "marketCapFormatted": "$9.8T"
+          "marketCapFormatted": "$9.8T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "042660.KS",
@@ -5663,7 +6047,10 @@
           "targetUpside": 16.54,
           "name": "한화오션",
           "country": "KR",
-          "marketCapFormatted": "$40.7T"
+          "marketCapFormatted": "$40.7T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "LMT",
@@ -5696,7 +6083,10 @@
           "targetUpside": 5.45,
           "name": "Lockheed Martin",
           "country": "US",
-          "marketCapFormatted": "$144.3B"
+          "marketCapFormatted": "$144.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "RTX",
@@ -5729,7 +6119,10 @@
           "targetUpside": 7.76,
           "name": "RTX",
           "country": "US",
-          "marketCapFormatted": "$266.4B"
+          "marketCapFormatted": "$266.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "NOC",
@@ -5762,7 +6155,10 @@
           "targetUpside": 1.74,
           "name": "Northrop Grumman",
           "country": "US",
-          "marketCapFormatted": "$101.2B"
+          "marketCapFormatted": "$101.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "LHX",
@@ -5795,7 +6191,10 @@
           "targetUpside": 8.86,
           "name": "L3Harris",
           "country": "US",
-          "marketCapFormatted": "$65.4B"
+          "marketCapFormatted": "$65.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "GD",
@@ -5828,7 +6227,10 @@
           "targetUpside": 9.54,
           "name": "General Dynamics",
           "country": "US",
-          "marketCapFormatted": "$97.4B"
+          "marketCapFormatted": "$97.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "BA.L",
@@ -5861,7 +6263,10 @@
           "targetUpside": 14.37,
           "name": "BAE Systems",
           "country": "UK",
-          "marketCapFormatted": "$54.8B"
+          "marketCapFormatted": "$54.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "RHM.DE",
@@ -5894,7 +6299,10 @@
           "targetUpside": 34.02,
           "name": "Rheinmetall",
           "country": "DE",
-          "marketCapFormatted": "$73.4B"
+          "marketCapFormatted": "$73.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "HO.PA",
@@ -5927,7 +6335,10 @@
           "targetUpside": 15.61,
           "name": "Thales",
           "country": "FR",
-          "marketCapFormatted": "$50.8B"
+          "marketCapFormatted": "$50.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "LDO.MI",
@@ -5960,7 +6371,10 @@
           "targetUpside": 11.8,
           "name": "Leonardo",
           "country": "IT",
-          "marketCapFormatted": "$30.7B"
+          "marketCapFormatted": "$30.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -6049,7 +6463,10 @@
           "targetUpside": 26.77,
           "name": "LG디스플레이",
           "country": "KR",
-          "marketCapFormatted": "$5.7T"
+          "marketCapFormatted": "$5.7T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "OLED",
@@ -6082,7 +6499,10 @@
           "targetUpside": 35.14,
           "name": "Universal Display",
           "country": "US",
-          "marketCapFormatted": "$5.8B"
+          "marketCapFormatted": "$5.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -6155,7 +6575,10 @@
           "targetUpside": -2.92,
           "name": "AU Optronics",
           "country": "TW",
-          "marketCapFormatted": "$113.2B"
+          "marketCapFormatted": "$113.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "6740.T",
@@ -6176,7 +6599,10 @@
           "recommendationMean": null,
           "name": "Japan Display",
           "country": "JP",
-          "marketCapFormatted": "$89.2B"
+          "marketCapFormatted": "$89.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "3481.TW",
@@ -6209,7 +6635,10 @@
           "targetUpside": -14.06,
           "name": "Innolux",
           "country": "TW",
-          "marketCapFormatted": "$168.4B"
+          "marketCapFormatted": "$168.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "000725.SZ",
@@ -6242,7 +6671,10 @@
           "targetUpside": 16.28,
           "name": "BOE Technology",
           "country": "CN",
-          "marketCapFormatted": "$161.1B"
+          "marketCapFormatted": "$161.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -6323,7 +6755,10 @@
           "targetUpside": 33.61,
           "name": "삼성바이오로직스",
           "country": "KR",
-          "marketCapFormatted": "$78.0T"
+          "marketCapFormatted": "$78.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "068270.KS",
@@ -6356,7 +6791,10 @@
           "targetUpside": 8.36,
           "name": "셀트리온",
           "country": "KR",
-          "marketCapFormatted": "$50.4T"
+          "marketCapFormatted": "$50.4T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "LONN.SW",
@@ -6389,7 +6827,10 @@
           "targetUpside": 30.2,
           "name": "Lonza",
           "country": "CH",
-          "marketCapFormatted": "$36.3B"
+          "marketCapFormatted": "$36.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "2269.HK",
@@ -6422,7 +6863,10 @@
           "targetUpside": 9.36,
           "name": "WuXi Biologics",
           "country": "CN",
-          "marketCapFormatted": "$158.2B"
+          "marketCapFormatted": "$158.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [
@@ -6511,7 +6955,10 @@
           "targetUpside": 12.57,
           "name": "Eli Lilly",
           "country": "US",
-          "marketCapFormatted": "$948.6B"
+          "marketCapFormatted": "$948.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "NVO",
@@ -6544,7 +6991,10 @@
           "targetUpside": 15.26,
           "name": "Novo Nordisk",
           "country": "DK",
-          "marketCapFormatted": "$244.5B"
+          "marketCapFormatted": "$244.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "ZEAL.CO",
@@ -6577,7 +7027,10 @@
           "targetUpside": 80.52,
           "name": "Zealand Pharma",
           "country": "DK",
-          "marketCapFormatted": "$28.7B"
+          "marketCapFormatted": "$28.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "VKTX",
@@ -6610,7 +7063,10 @@
           "targetUpside": 228.37,
           "name": "Viking Therapeutics",
           "country": "US",
-          "marketCapFormatted": "$3.2B"
+          "marketCapFormatted": "$3.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "AMGN",
@@ -6643,7 +7099,10 @@
           "targetUpside": -11.03,
           "name": "Amgen",
           "country": "US",
-          "marketCapFormatted": "$207.1B"
+          "marketCapFormatted": "$207.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -6705,7 +7164,10 @@
           "targetUpside": 1.87,
           "name": "Tesla",
           "country": "US",
-          "marketCapFormatted": "$1.5T"
+          "marketCapFormatted": "$1.5T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "RIVN",
@@ -6738,7 +7200,10 @@
           "targetUpside": 14.53,
           "name": "Rivian",
           "country": "US",
-          "marketCapFormatted": "$18.2B"
+          "marketCapFormatted": "$18.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "NIO",
@@ -6771,7 +7236,10 @@
           "targetUpside": 30.79,
           "name": "NIO",
           "country": "CN",
-          "marketCapFormatted": "$12.7B"
+          "marketCapFormatted": "$12.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "XPEV",
@@ -6804,7 +7272,10 @@
           "targetUpside": 59.71,
           "name": "XPeng",
           "country": "CN",
-          "marketCapFormatted": "$17.2B"
+          "marketCapFormatted": "$17.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "LI",
@@ -6837,7 +7308,10 @@
           "targetUpside": 25.13,
           "name": "Li Auto",
           "country": "CN",
-          "marketCapFormatted": "$19.2B"
+          "marketCapFormatted": "$19.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "1211.HK",
@@ -6870,7 +7344,10 @@
           "targetUpside": 36.79,
           "name": "BYD",
           "country": "CN",
-          "marketCapFormatted": "$856.1B"
+          "marketCapFormatted": "$856.1B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -6932,7 +7409,10 @@
           "targetUpside": 24.27,
           "name": "현대자동차",
           "country": "KR",
-          "marketCapFormatted": "$124.7T"
+          "marketCapFormatted": "$124.7T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "000270.KS",
@@ -6965,7 +7445,10 @@
           "targetUpside": 29.95,
           "name": "기아",
           "country": "KR",
-          "marketCapFormatted": "$59.0T"
+          "marketCapFormatted": "$59.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "TM",
@@ -6998,7 +7481,10 @@
           "targetUpside": 0.59,
           "name": "Toyota",
           "country": "JP",
-          "marketCapFormatted": "$319.8B"
+          "marketCapFormatted": "$319.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "VOW3.DE",
@@ -7031,7 +7517,10 @@
           "targetUpside": 16.07,
           "name": "Volkswagen",
           "country": "DE",
-          "marketCapFormatted": "$51.3B"
+          "marketCapFormatted": "$51.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "GM",
@@ -7064,7 +7553,10 @@
           "targetUpside": 10.55,
           "name": "GM",
           "country": "US",
-          "marketCapFormatted": "$78.6B"
+          "marketCapFormatted": "$78.6B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "F",
@@ -7097,7 +7589,10 @@
           "targetUpside": -0.28,
           "name": "Ford",
           "country": "US",
-          "marketCapFormatted": "$55.0B"
+          "marketCapFormatted": "$55.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "BMW.DE",
@@ -7130,7 +7625,10 @@
           "targetUpside": 4.36,
           "name": "BMW",
           "country": "DE",
-          "marketCapFormatted": "$53.9B"
+          "marketCapFormatted": "$53.9B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MBG.DE",
@@ -7163,7 +7661,10 @@
           "targetUpside": 8.65,
           "name": "Mercedes-Benz",
           "country": "DE",
-          "marketCapFormatted": "$52.0B"
+          "marketCapFormatted": "$52.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "STLA",
@@ -7196,7 +7697,10 @@
           "targetUpside": 56.81,
           "name": "Stellantis",
           "country": "NL",
-          "marketCapFormatted": "$21.0B"
+          "marketCapFormatted": "$21.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -7258,7 +7762,10 @@
           "targetUpside": 5.24,
           "name": "Apple",
           "country": "US",
-          "marketCapFormatted": "$4.1T"
+          "marketCapFormatted": "$4.1T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MSFT",
@@ -7291,7 +7798,10 @@
           "targetUpside": 49.54,
           "name": "Microsoft",
           "country": "US",
-          "marketCapFormatted": "$3.0T"
+          "marketCapFormatted": "$3.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "GOOGL",
@@ -7324,7 +7834,10 @@
           "targetUpside": 13.91,
           "name": "Alphabet",
           "country": "US",
-          "marketCapFormatted": "$3.9T"
+          "marketCapFormatted": "$3.9T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "META",
@@ -7357,7 +7870,10 @@
           "targetUpside": 29.99,
           "name": "Meta",
           "country": "US",
-          "marketCapFormatted": "$1.7T"
+          "marketCapFormatted": "$1.7T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "AMZN",
@@ -7390,7 +7906,10 @@
           "targetUpside": 34.87,
           "name": "Amazon",
           "country": "US",
-          "marketCapFormatted": "$2.3T"
+          "marketCapFormatted": "$2.3T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -7452,7 +7971,10 @@
           "targetUpside": 30.59,
           "name": "네이버",
           "country": "KR",
-          "marketCapFormatted": "$37.3T"
+          "marketCapFormatted": "$37.3T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "035720.KS",
@@ -7485,7 +8007,10 @@
           "targetUpside": 33.88,
           "name": "카카오",
           "country": "KR",
-          "marketCapFormatted": "$25.2T"
+          "marketCapFormatted": "$25.2T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "0700.HK",
@@ -7518,7 +8043,10 @@
           "targetUpside": 34.4,
           "name": "Tencent",
           "country": "CN",
-          "marketCapFormatted": "$5.0T"
+          "marketCapFormatted": "$5.0T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "SE",
@@ -7551,7 +8079,10 @@
           "targetUpside": 74.64,
           "name": "Sea Limited",
           "country": "SG",
-          "marketCapFormatted": "$64.3B"
+          "marketCapFormatted": "$64.3B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "BABA",
@@ -7584,7 +8115,10 @@
           "targetUpside": 21.77,
           "name": "Alibaba",
           "country": "CN",
-          "marketCapFormatted": "$388.0B"
+          "marketCapFormatted": "$388.0B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "PDD",
@@ -7617,7 +8151,10 @@
           "targetUpside": 41.05,
           "name": "PDD Holdings",
           "country": "CN",
-          "marketCapFormatted": "$149.4B"
+          "marketCapFormatted": "$149.4B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "GRAB",
@@ -7650,7 +8187,10 @@
           "targetUpside": 59.3,
           "name": "Grab",
           "country": "SG",
-          "marketCapFormatted": "$17.5B"
+          "marketCapFormatted": "$17.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
@@ -7712,7 +8252,10 @@
           "targetUpside": 8.44,
           "name": "KB금융",
           "country": "KR",
-          "marketCapFormatted": "$54.4T"
+          "marketCapFormatted": "$54.4T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "055550.KS",
@@ -7745,7 +8288,10 @@
           "targetUpside": 10.09,
           "name": "신한지주",
           "country": "KR",
-          "marketCapFormatted": "$44.2T"
+          "marketCapFormatted": "$44.2T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "086790.KS",
@@ -7778,7 +8324,10 @@
           "targetUpside": 1.75,
           "name": "하나금융",
           "country": "KR",
-          "marketCapFormatted": "$32.4T"
+          "marketCapFormatted": "$32.4T",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "JPM",
@@ -7811,7 +8360,10 @@
           "targetUpside": 6.54,
           "name": "JP Morgan",
           "country": "US",
-          "marketCapFormatted": "$877.7B"
+          "marketCapFormatted": "$877.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "BAC",
@@ -7844,7 +8396,10 @@
           "targetUpside": 10.04,
           "name": "Bank of America",
           "country": "US",
-          "marketCapFormatted": "$412.8B"
+          "marketCapFormatted": "$412.8B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "GS",
@@ -7877,7 +8432,10 @@
           "targetUpside": 2.34,
           "name": "Goldman Sachs",
           "country": "US",
-          "marketCapFormatted": "$281.2B"
+          "marketCapFormatted": "$281.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "HSBC",
@@ -7910,7 +8468,10 @@
           "targetUpside": -4.31,
           "name": "HSBC",
           "country": "UK",
-          "marketCapFormatted": "$306.5B"
+          "marketCapFormatted": "$306.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "MUFG",
@@ -7943,7 +8504,10 @@
           "targetUpside": -8.7,
           "name": "MUFG",
           "country": "JP",
-          "marketCapFormatted": "$216.5B"
+          "marketCapFormatted": "$216.5B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "UBSG.SW",
@@ -7976,7 +8540,10 @@
           "targetUpside": 12.07,
           "name": "UBS",
           "country": "CH",
-          "marketCapFormatted": "$104.7B"
+          "marketCapFormatted": "$104.7B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         },
         {
           "symbol": "D05.SI",
@@ -8009,7 +8576,10 @@
           "targetUpside": -1.09,
           "name": "DBS Group",
           "country": "SG",
-          "marketCapFormatted": "$166.2B"
+          "marketCapFormatted": "$166.2B",
+          "change1d": null,
+          "change7d": null,
+          "change30d": null
         }
       ],
       "shortage": [],
