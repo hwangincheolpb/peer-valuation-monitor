@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eu
 
 cd "/Users/ai/dev/peer-valuation-monitor"
 PYTHON="/Users/ai/homebrew/opt/python@3.12/libexec/bin/python3"
