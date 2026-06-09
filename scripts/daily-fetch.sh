@@ -11,6 +11,9 @@ echo "$LOG Starting daily fetch..."
 $PYTHON fetch_data.py
 
 # Step 2: Git commit + push
+if ! git diff --quiet fetch_data.py scripts/ config.json 2>/dev/null; then
+  echo "WARNING: uncommitted changes in pipeline code — running unversioned code" >&2
+fi
 git add data/
 git diff --cached --quiet && { echo "$LOG No changes to commit"; exit 0; }
 

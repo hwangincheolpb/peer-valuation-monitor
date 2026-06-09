@@ -22,6 +22,8 @@ KST = timezone(timedelta(hours=9))
 
 # ── 통화 → USD 환율 (지연 로딩 + 메모이즈) ─────────────────────────────
 _FX_CACHE = {}
+_FX_FALLBACK = {"KRW":1350,"JPY":150,"HKD":7.8,"TWD":32,"EUR":0.92,"GBP":0.79,
+                "CHF":0.88,"AUD":1.5,"CNY":7.2,"CAD":1.36,"DKK":6.9,"SGD":1.34,"NOK":10.5,"BRL":5.0}
 
 
 def get_fx_rate(currency):
@@ -36,9 +38,15 @@ def get_fx_rate(currency):
         h = yf.Ticker(f"USD{base}=X").history(period="5d")
         if not h.empty:
             rate = float(h["Close"].dropna().iloc[-1])
+        if rate is not None and not (0 < rate < 100000):
+            rate = None
     except Exception:
         rate = None
-    _FX_CACHE[base] = rate
+    if rate is None:
+        rate = _FX_FALLBACK.get(base)
+        print(f"  FX fallback used for {base}: {rate}", file=sys.stderr)
+    if rate is not None:
+        _FX_CACHE[base] = rate
     return rate
 
 
@@ -319,6 +327,14 @@ def main():
     output["totalStocks"] = total_stocks
     output["successCount"] = total_stocks - len(errors)
 
+    fail_rate = len(errors) / total_stocks if total_stocks else 1.0
+    if fail_rate > 0.20:
+        print(f"ERROR: {len(errors)}/{total_stocks} stocks failed ({fail_rate:.0%}) — not writing output, exiting 1", file=sys.stderr)
+        sys.exit(1)
+
+    output["fxRates"] = dict(_FX_CACHE)   # {currency: units per USD}
+    output["fxAsOf"] = output["fetchedAt"]
+
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
@@ -345,7 +361,7 @@ def save_snapshot(output):
             snapshot["stocks"].append({
                 "s": stock["symbol"],
                 "c": cat["id"],
-                "p": stock.get("currentPrice"),
+                "p": stock.get("currentPriceLocal", stock.get("currentPrice")),
                 "fpe": stock.get("forwardPE"),
                 "tpe": stock.get("trailingPE"),
                 "pb": stock.get("priceToBook"),
