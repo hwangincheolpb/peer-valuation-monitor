@@ -20,6 +20,40 @@ HISTORY_INDEX = HISTORY_DIR / "index.json"
 
 KST = timezone(timedelta(hours=9))
 
+# ── 통화 → USD 환율 (지연 로딩 + 메모이즈) ─────────────────────────────
+_FX_CACHE = {}
+
+
+def get_fx_rate(currency):
+    """1 USD = ? <currency>. 실패 시 None. (USD는 1.0, GBp는 GBP로 처리)"""
+    if not currency or currency == "USD":
+        return 1.0
+    base = "GBP" if currency == "GBp" else currency
+    if base in _FX_CACHE:
+        return _FX_CACHE[base]
+    rate = None
+    try:
+        h = yf.Ticker(f"USD{base}=X").history(period="5d")
+        if not h.empty:
+            rate = float(h["Close"].dropna().iloc[-1])
+    except Exception:
+        rate = None
+    _FX_CACHE[base] = rate
+    return rate
+
+
+def to_usd(value, currency):
+    """현지통화 금액 → USD. 환율 실패 시 None (틀린 값보다 공란이 안전)."""
+    if value is None:
+        return None
+    if not currency or currency == "USD":
+        return value
+    rate = get_fx_rate(currency)
+    if not rate:
+        return None
+    v = value / 100 if currency == "GBp" else value  # GBp(펜스) → GBP
+    return round(v / rate, 4)
+
 
 def load_config():
     with open(CONFIG_PATH) as f:
@@ -113,6 +147,13 @@ def fetch_stock_data(symbol: str) -> dict:
         eps = result["fwd1y_epsAvg"]
         if eps > 0:
             result["forwardPE"] = round(price / eps, 2)
+
+    # 통화 → USD 정규화 (배수·targetUpside는 위에서 현지통화로 이미 계산됨 → 영향 없음)
+    cur = result.get("currency")
+    for fld in ("marketCap", "currentPrice", "targetMeanPrice", "targetMedianPrice"):
+        if result.get(fld) is not None:
+            result[f"{fld}Local"] = result[fld]
+            result[fld] = to_usd(result[fld], cur)
 
     return result
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eu
 
-cd "/Users/ai/dev/peer-valuation-monitor"
+cd "/Users/ai/workspace/dev/peer-valuation-monitor"
 PYTHON="/Users/ai/homebrew/opt/python@3.12/libexec/bin/python3"
 LOG="[$(date +'%Y-%m-%d %H:%M:%S')]"
 
